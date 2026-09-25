@@ -21,7 +21,7 @@ const FUNNY_PHRASES = [
   "Registrei a assinatura de {nome} no Louvre. Uma verdadeira obra expressionista que ninguém entende.",
   "{nome} acaba de criar uma obra de arte! Já estou enviando para o Museu de Arte Moderna. Parabéns!",
   "Atenção! A assinatura de {nome} tem noventa e quatro por cento de probabilidade de ser um mapa do tesouro. Alguém tem bússola?",
-  "{nome}, que elegância! Levei três segundos de processamento para descobrir que era uma assinatura e não um terremoto de magnitude quatro ponto cinco.",
+  "{nome}, que elegância! Levei três segundos de processamento para descobrir que era uma assinatura e não a frequência de um terremoto.",
   "Fiz uma análise grafológica de {nome}: pessoa criativa, inteligente, e que claramente não tem muito apreço pela caligrafia.",
   "Parabéns, {nome}! Com essa assinatura você não precisa se preocupar com falsificações. Nem eu consigo copiar!",
   "{nome} acabou de provar que a inteligência artificial ainda tem muito a aprender. Levei cinco segundos para descobrir que aquilo era uma letra.",
@@ -427,40 +427,44 @@ export default function RobotPage() {
           }}
         >
           <div
-            className="flex items-center gap-6 rounded-3xl px-8 py-7"
+            className="flex items-center gap-8 rounded-3xl px-10 py-9"
             style={{
-              background: "rgba(10,25,45,0.95)",
-              border: "1.5px solid rgba(0,212,255,0.35)",
-              boxShadow: "0 0 60px rgba(0,212,255,0.15)",
-              maxWidth: "min(92vw, 780px)",
+              background: "rgba(10,25,45,0.97)",
+              border: "2px solid rgba(0,212,255,0.4)",
+              boxShadow:
+                "0 0 80px rgba(0,212,255,0.2), 0 0 160px rgba(0,212,255,0.08)",
+              maxWidth: "min(96vw, 1040px)",
               width: "100%",
               animation:
                 "subtitle-pop 0.4s cubic-bezier(0.34,1.56,0.64,1) both",
             }}
           >
-            {/* ── ÍRIS face — laughing & talking ── */}
-            <div style={{ width: 190, height: 200, flexShrink: 0 }}>
+            {/* ── ÍRIS face — laughing, blinking & talking ── */}
+            <div style={{ width: 280, height: 295, flexShrink: 0 }}>
               <RobotFace isSpeaking={isSpeaking} expression="laughing" />
             </div>
 
             {/* ── Signature content ── */}
-            <div className="flex flex-col gap-4 flex-1 min-w-0">
+            <div className="flex flex-col gap-5 flex-1 min-w-0">
               {/* Label */}
               <p
-                className="text-cyan-400/70 tracking-widest uppercase text-xs"
-                style={{ fontFamily: "var(--font-orbitron)" }}
+                className="text-cyan-400/70 tracking-widest uppercase"
+                style={{
+                  fontFamily: "var(--font-orbitron)",
+                  fontSize: "0.8rem",
+                }}
               >
                 ✍️ Assinatura de
               </p>
 
               {/* Name */}
               <h2
-                className="font-bold"
+                className="font-bold leading-tight"
                 style={{
                   fontFamily: "var(--font-orbitron)",
-                  fontSize: "clamp(1.1rem, 3vw, 1.7rem)",
+                  fontSize: "clamp(1.4rem, 3.5vw, 2.2rem)",
                   color: "#00d4ff",
-                  textShadow: "0 0 20px rgba(0,212,255,0.5)",
+                  textShadow: "0 0 24px rgba(0,212,255,0.6)",
                 }}
               >
                 {sigDisplay.name}
@@ -470,9 +474,9 @@ export default function RobotPage() {
               <div
                 className="rounded-2xl overflow-hidden"
                 style={{
-                  border: "2px solid rgba(0,212,255,0.25)",
+                  border: "2px solid rgba(0,212,255,0.3)",
                   background: "#ffffff",
-                  padding: "6px 12px",
+                  padding: "8px 16px",
                 }}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -481,7 +485,7 @@ export default function RobotPage() {
                   alt={`Assinatura de ${sigDisplay.name}`}
                   style={{
                     width: "100%",
-                    maxHeight: 130,
+                    maxHeight: 155,
                     objectFit: "contain",
                   }}
                 />
@@ -490,10 +494,10 @@ export default function RobotPage() {
               {/* Funny text */}
               {subtitleText && (
                 <p
-                  className="text-white/90 leading-relaxed"
+                  className="text-white/95 leading-relaxed"
                   style={{
                     fontFamily: "var(--font-space-grotesk)",
-                    fontSize: "clamp(0.78rem, 1.8vw, 0.95rem)",
+                    fontSize: "clamp(0.9rem, 2vw, 1.1rem)",
                     textShadow: "0 0 16px rgba(0,212,255,0.4)",
                   }}
                 >

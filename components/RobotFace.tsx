@@ -220,12 +220,12 @@ export default function RobotFace({
           <feDropShadow dx="0" dy="6" stdDeviation="10" floodColor="#90c8e8" floodOpacity="0.45" />
         </filter>
 
-        {/* Clip for eye blink */}
+        {/* Clip for eye blink — laughing uses narrow fixed height that still blinks */}
         <clipPath id="leftEyeClip">
-          <ellipse cx="140" cy="193" rx="52" ry={52 * blinkScale} />
+          <ellipse cx="140" cy="193" rx="52" ry={expression === "laughing" ? 19 * blinkScale : 52 * blinkScale} />
         </clipPath>
         <clipPath id="rightEyeClip">
-          <ellipse cx="260" cy="193" rx="52" ry={52 * blinkScale} />
+          <ellipse cx="260" cy="193" rx="52" ry={expression === "laughing" ? 19 * blinkScale : 52 * blinkScale} />
         </clipPath>
       </defs>
 
@@ -268,110 +268,34 @@ export default function RobotFace({
       {/* ── EYEBROWS ─────────────────────────────────────────── */}
       {renderEyebrows()}
 
-      {/* ── EYES ─────────────────────────────────────────────── */}
-      {expression === "laughing" ? (
-        /* 😆 closed squinting eyes */
-        <>
-          {/* Left closed eye */}
-          <g>
-            {/* white sclera background so lines show cleanly on face */}
-            <ellipse cx="140" cy="198" rx="50" ry="22" fill="white" opacity="0.85" />
-            {/* upper squint arc — thick, curves upward = lid pressed down */}
-            <path
-              d="M 92 196 Q 140 158 188 196"
-              fill="none"
-              stroke="#3d4f61"
-              strokeWidth="10"
-              strokeLinecap="round"
-            />
-            {/* lower eyelid hint */}
-            <path
-              d="M 100 204 Q 140 216 180 204"
-              fill="none"
-              stroke="#7a8fa6"
-              strokeWidth="3.5"
-              strokeLinecap="round"
-              opacity="0.6"
-            />
-            {/* tiny shine dots for life */}
-            <circle cx="122" cy="176" r="4" fill="white" opacity="0.7" />
-            <circle cx="134" cy="170" r="2.5" fill="white" opacity="0.5" />
-          </g>
+      {/* ── EYES (unified — clip handles laughing narrowness + blinking) ──── */}
+      {/* Left Eye */}
+      <g clipPath="url(#leftEyeClip)">
+        <circle cx="140" cy="193" r="52" fill="white" />
+        <circle cx={140 + pupilPos.lx} cy={193 + pupilPos.ly} r="36" fill="url(#pupilGrad)" />
+        <circle cx={152 + pupilPos.lx * 0.4} cy={178 + pupilPos.ly * 0.4} r="13" fill="white" opacity="0.92" />
+        <circle cx={160 + pupilPos.lx * 0.3} cy={197 + pupilPos.ly * 0.3} r="5" fill="white" opacity="0.45" />
+      </g>
 
-          {/* Right closed eye */}
-          <g>
-            <ellipse cx="260" cy="198" rx="50" ry="22" fill="white" opacity="0.85" />
-            <path
-              d="M 212 196 Q 260 158 308 196"
-              fill="none"
-              stroke="#3d4f61"
-              strokeWidth="10"
-              strokeLinecap="round"
-            />
-            <path
-              d="M 220 204 Q 260 216 300 204"
-              fill="none"
-              stroke="#7a8fa6"
-              strokeWidth="3.5"
-              strokeLinecap="round"
-              opacity="0.6"
-            />
-            <circle cx="242" cy="176" r="4" fill="white" opacity="0.7" />
-            <circle cx="254" cy="170" r="2.5" fill="white" opacity="0.5" />
-          </g>
-        </>
-      ) : (
-        /* Normal open eyes */
-        <>
-          {/* ── LEFT EYE ─────────────────────────────────────── */}
-          <g clipPath="url(#leftEyeClip)">
-            <circle cx="140" cy="193" r="52" fill="white" />
-            <circle
-              cx={140 + pupilPos.lx}
-              cy={193 + pupilPos.ly}
-              r="36"
-              fill="url(#pupilGrad)"
-            />
-            <circle
-              cx={152 + pupilPos.lx * 0.4}
-              cy={178 + pupilPos.ly * 0.4}
-              r="13"
-              fill="white"
-              opacity="0.92"
-            />
-            <circle
-              cx={160 + pupilPos.lx * 0.3}
-              cy={197 + pupilPos.ly * 0.3}
-              r="5"
-              fill="white"
-              opacity="0.45"
-            />
-          </g>
+      {/* Right Eye */}
+      <g clipPath="url(#rightEyeClip)">
+        <circle cx="260" cy="193" r="52" fill="white" />
+        <circle cx={260 + pupilPos.rx} cy={193 + pupilPos.ry} r="36" fill="url(#pupilGrad)" />
+        <circle cx={272 + pupilPos.rx * 0.4} cy={178 + pupilPos.ry * 0.4} r="13" fill="white" opacity="0.92" />
+        <circle cx={280 + pupilPos.rx * 0.3} cy={197 + pupilPos.ry * 0.3} r="5" fill="white" opacity="0.45" />
+      </g>
 
-          {/* ── RIGHT EYE ────────────────────────────────────── */}
-          <g clipPath="url(#rightEyeClip)">
-            <circle cx="260" cy="193" r="52" fill="white" />
-            <circle
-              cx={260 + pupilPos.rx}
-              cy={193 + pupilPos.ry}
-              r="36"
-              fill="url(#pupilGrad)"
-            />
-            <circle
-              cx={272 + pupilPos.rx * 0.4}
-              cy={178 + pupilPos.ry * 0.4}
-              r="13"
-              fill="white"
-              opacity="0.92"
-            />
-            <circle
-              cx={280 + pupilPos.rx * 0.3}
-              cy={197 + pupilPos.ry * 0.3}
-              r="5"
-              fill="white"
-              opacity="0.45"
-            />
-          </g>
+      {/* Laughing: squinting upper-eyelid arcs drawn on top of the clipped eyes */}
+      {expression === "laughing" && blinkScale > 0.15 && (
+        <>
+          {/* Left squinting lid */}
+          <path d="M 90 184 Q 140 172 190 184" fill="none" stroke="#3d4f61" strokeWidth="9" strokeLinecap="round" />
+          {/* Left lower-lid hint */}
+          <path d="M 98 206 Q 140 214 182 206" fill="none" stroke="#7a8fa6" strokeWidth="3" strokeLinecap="round" opacity="0.5" />
+          {/* Right squinting lid */}
+          <path d="M 210 184 Q 260 172 310 184" fill="none" stroke="#3d4f61" strokeWidth="9" strokeLinecap="round" />
+          {/* Right lower-lid hint */}
+          <path d="M 218 206 Q 260 214 302 206" fill="none" stroke="#7a8fa6" strokeWidth="3" strokeLinecap="round" opacity="0.5" />
         </>
       )}
 

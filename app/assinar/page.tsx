@@ -28,8 +28,10 @@ export default function AssinarPage() {
 
   // ── Coordinate helpers (mouse + touch) ──────────────────────────────────────
   const getPos = (
-    e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>,
-    canvas: HTMLCanvasElement
+    e:
+      | React.MouseEvent<HTMLCanvasElement>
+      | React.TouchEvent<HTMLCanvasElement>,
+    canvas: HTMLCanvasElement,
   ) => {
     const rect = canvas.getBoundingClientRect();
     const scaleX = canvas.width / rect.width;
@@ -50,7 +52,9 @@ export default function AssinarPage() {
 
   // ── Drawing handlers ─────────────────────────────────────────────────────────
   const startDraw = (
-    e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>
+    e:
+      | React.MouseEvent<HTMLCanvasElement>
+      | React.TouchEvent<HTMLCanvasElement>,
   ) => {
     e.preventDefault();
     const canvas = canvasRef.current;
@@ -60,7 +64,9 @@ export default function AssinarPage() {
   };
 
   const draw = (
-    e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>
+    e:
+      | React.MouseEvent<HTMLCanvasElement>
+      | React.TouchEvent<HTMLCanvasElement>,
   ) => {
     e.preventDefault();
     if (!isDrawing.current) return;
@@ -134,7 +140,9 @@ export default function AssinarPage() {
     return (
       <div
         className="min-h-screen flex flex-col items-center justify-center px-6 py-10"
-        style={{ background: "linear-gradient(160deg, #020a16 0%, #030b18 100%)" }}
+        style={{
+          background: "linear-gradient(160deg, #020a16 0%, #030b18 100%)",
+        }}
       >
         {/* ÍRIS face */}
         <div style={{ width: 200, height: 210 }}>
@@ -161,15 +169,21 @@ export default function AssinarPage() {
           </h2>
           <p
             className="text-cyan-200 leading-relaxed mb-2"
-            style={{ fontFamily: "var(--font-space-grotesk)", fontSize: "1.05rem" }}
+            style={{
+              fontFamily: "var(--font-space-grotesk)",
+              fontSize: "1.05rem",
+            }}
           >
-            Sua assinatura foi registrada com sucesso!
+            Sua BELA assinatura foi registrada com sucesso!
           </p>
           <p
             className="text-cyan-400/70 leading-relaxed mb-8"
-            style={{ fontFamily: "var(--font-space-grotesk)", fontSize: "0.95rem" }}
+            style={{
+              fontFamily: "var(--font-space-grotesk)",
+              fontSize: "0.95rem",
+            }}
           >
-            Por favor, volte ao seu lugar e continue aproveitando a palestra. 😊
+            Por favor, procure um assento e aproveite a palestra. 😊
           </p>
 
           <button
@@ -198,7 +212,9 @@ export default function AssinarPage() {
   return (
     <div
       className="min-h-screen flex flex-col items-center px-4 py-6"
-      style={{ background: "linear-gradient(160deg, #020a16 0%, #030b18 100%)" }}
+      style={{
+        background: "linear-gradient(160deg, #020a16 0%, #030b18 100%)",
+      }}
     >
       {/* ── Header: ÍRIS face + welcome ───────────────── */}
       <div className="flex flex-col items-center mb-6">
@@ -220,7 +236,10 @@ export default function AssinarPage() {
           </h1>
           <p
             className="mt-2 text-cyan-100 leading-snug"
-            style={{ fontFamily: "var(--font-space-grotesk)", fontSize: "1rem" }}
+            style={{
+              fontFamily: "var(--font-space-grotesk)",
+              fontSize: "1rem",
+            }}
           >
             Olá! Fico muito feliz em ter você aqui! 🤩
             <br />
@@ -298,9 +317,7 @@ export default function AssinarPage() {
               border: hasDrawn
                 ? "2px solid rgba(0,212,255,0.6)"
                 : "2px dashed rgba(0,212,255,0.25)",
-              boxShadow: hasDrawn
-                ? "0 0 16px rgba(0,212,255,0.15)"
-                : "none",
+              boxShadow: hasDrawn ? "0 0 16px rgba(0,212,255,0.15)" : "none",
             }}
           >
             <canvas
@@ -320,7 +337,10 @@ export default function AssinarPage() {
             {!hasDrawn && (
               <div
                 className="absolute inset-0 flex items-center justify-center pointer-events-none"
-                style={{ color: "#aaaaaa", fontFamily: "var(--font-space-grotesk)" }}
+                style={{
+                  color: "#aaaaaa",
+                  fontFamily: "var(--font-space-grotesk)",
+                }}
               >
                 ✍️ Assine aqui com o dedo ou mouse
               </div>
