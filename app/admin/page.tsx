@@ -122,7 +122,7 @@ export default function AdminPage() {
             body: JSON.stringify({ image: base64 }),
           });
           const { text } = await res.json();
-          if (text) await insertCommand(text, "direct", "happy");
+          if (text) await insertCommand(text, "direct");
         } catch (e) {
           console.error("Auto-greet error:", e);
         }
