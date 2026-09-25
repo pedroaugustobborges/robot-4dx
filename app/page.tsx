@@ -51,8 +51,6 @@ export default function RobotPage() {
 
   const doSpeak = async (text: string, commandId?: string) => {
     isPlayingRef.current = true;
-    setIsSpeaking(true);
-    setSubtitleText(text);
 
     try {
       const res = await fetch("/api/speak", {
@@ -67,6 +65,10 @@ export default function RobotPage() {
       const url = URL.createObjectURL(blob);
       const audio = new Audio(url);
       audioRef.current = audio;
+
+      // Only start mouth + subtitle when audio is actually ready to play
+      setIsSpeaking(true);
+      setSubtitleText(text);
 
       await audio.play();
 
