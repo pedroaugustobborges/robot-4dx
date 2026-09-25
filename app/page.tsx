@@ -4,7 +4,13 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import RobotFace from "@/components/RobotFace";
 import { createClient } from "@/lib/supabase";
 
-type Expression = "neutral" | "happy" | "curious" | "thinking" | "surprised";
+type Expression =
+  | "neutral"
+  | "happy"
+  | "curious"
+  | "thinking"
+  | "surprised"
+  | "laughing";
 
 // ── 30 funny phrases about handwriting/signatures ──────────────────────────────
 const FUNNY_PHRASES = [
@@ -24,7 +30,7 @@ const FUNNY_PHRASES = [
   "{nome}, sua assinatura é fascinante! Quarenta por cento arte moderna, trinta e cinco por cento prescrição médica, vinte e cinco por cento abalo sísmico.",
   "Vou usar a assinatura de {nome} como captcha do nosso sistema. Tenho certeza que nenhum robô vai conseguir decifrar. Eu mesma estou com dificuldade!",
   "{nome} tem um dom especial! Essa assinatura parece um poema moderno: profunda, misteriosa e incompreensível para a maioria.",
-  "Analisei o DNA da caligrafia de {nome}. Resultado: parente distante de hieróglifos egípcios. Fascinante!",
+  "Analisei o DNA da caligrafia de {nome}. Resultado: parente próximo de hieróglifos egípcios. Fascinante!",
   "Pronto, {nome} registrado com sucesso! Minha câmera ficou com tonteira tentando ler, mas conseguimos na terceira tentativa!",
   "{nome}, que economia de tinta! Em apenas alguns traços você disse tudo. Eu só não sei o quê. Mas foi lindo!",
   "A assinatura de {nome} é tão especial que meu algoritmo de reconhecimento pediu férias logo depois de analisá-la.",
@@ -32,7 +38,7 @@ const FUNNY_PHRASES = [
   "Que charme, {nome}! Uma assinatura tão única que já está sendo estudada pela NASA como possível mensagem extraterrestre.",
   "Erro quatrocentos e quatro: letra de {nome} não encontrada. Tentando novamente… tentando… desistindo com muito carinho.",
   "{nome}, com essa assinatura você está aprovado para Ministro da Saúde. A letra é completamente regulamentar!",
-  "A assinatura de {nome} me lembra um teste de Rorschach. Cada pessoa vê uma coisa diferente. Eu vi esperança e criatividade.",
+  "A assinatura de {nome} me lembra um teste de Rorschach. Cada pessoa vê uma coisa diferente. Eu ainda não sei o que eu vi.",
   "{nome}, sua assinatura é uma obra prima! Já estou emoldurando para colocar no corredor aqui do hospital.",
   "Processando assinatura de {nome}… processando… processando… minha inteligência artificial está em leve crise existencial.",
   "{nome} acabou de criar um novo conceito de caligrafia! Daqui pra frente vou chamar esse estilo de Método {nome}.",
@@ -55,7 +61,7 @@ interface PendingSignature {
 export default function RobotPage() {
   const [started, setStarted] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
-  const [expression] = useState<Expression>("happy");
+  const [expression, setExpression] = useState<Expression>("happy");
   const [subtitleText, setSubtitleText] = useState("");
   const [showCamera, setShowCamera] = useState(true);
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -179,7 +185,8 @@ export default function RobotPage() {
     const sig = sigQueueRef.current.shift()!;
     sigProcessingRef.current = true;
 
-    // Show the signature image
+    // Switch to laughing expression and show signature
+    setExpression("laughing");
     setSigDisplay({ name: sig.name, data: sig.signature_data });
 
     // Speak the funny phrase (goes through the normal speak queue)
@@ -197,6 +204,7 @@ export default function RobotPage() {
     // Hide signature after 18 seconds (phrase + buffer)
     sigTimerRef.current = setTimeout(() => {
       setSigDisplay(null);
+      setExpression("happy");
       sigProcessingRef.current = false;
       // Process next one if queued
       processNextSignature();
@@ -419,69 +427,80 @@ export default function RobotPage() {
           }}
         >
           <div
-            className="flex flex-col items-center gap-5 rounded-3xl px-10 py-8"
+            className="flex items-center gap-6 rounded-3xl px-8 py-7"
             style={{
               background: "rgba(10,25,45,0.95)",
               border: "1.5px solid rgba(0,212,255,0.35)",
               boxShadow: "0 0 60px rgba(0,212,255,0.15)",
-              maxWidth: "min(90vw, 660px)",
+              maxWidth: "min(92vw, 780px)",
               width: "100%",
               animation:
                 "subtitle-pop 0.4s cubic-bezier(0.34,1.56,0.64,1) both",
             }}
           >
-            {/* Label */}
-            <p
-              className="text-cyan-400/70 tracking-widest uppercase text-xs"
-              style={{ fontFamily: "var(--font-orbitron)" }}
-            >
-              ✍️ Assinatura de
-            </p>
-
-            {/* Name */}
-            <h2
-              className="text-white font-bold text-center"
-              style={{
-                fontFamily: "var(--font-orbitron)",
-                fontSize: "clamp(1.3rem, 4vw, 2rem)",
-                color: "#00d4ff",
-                textShadow: "0 0 20px rgba(0,212,255,0.5)",
-              }}
-            >
-              {sigDisplay.name}
-            </h2>
-
-            {/* Signature image */}
-            <div
-              className="rounded-2xl overflow-hidden"
-              style={{
-                border: "2px solid rgba(0,212,255,0.25)",
-                background: "#ffffff",
-                padding: "8px 16px",
-                width: "100%",
-              }}
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={sigDisplay.data}
-                alt={`Assinatura de ${sigDisplay.name}`}
-                style={{ width: "100%", maxHeight: 160, objectFit: "contain" }}
-              />
+            {/* ── ÍRIS face — laughing & talking ── */}
+            <div style={{ width: 190, height: 200, flexShrink: 0 }}>
+              <RobotFace isSpeaking={isSpeaking} expression="laughing" />
             </div>
 
-            {/* Funny subtitle text */}
-            {subtitleText && (
+            {/* ── Signature content ── */}
+            <div className="flex flex-col gap-4 flex-1 min-w-0">
+              {/* Label */}
               <p
-                className="text-center text-white/90 leading-relaxed"
+                className="text-cyan-400/70 tracking-widest uppercase text-xs"
+                style={{ fontFamily: "var(--font-orbitron)" }}
+              >
+                ✍️ Assinatura de
+              </p>
+
+              {/* Name */}
+              <h2
+                className="font-bold"
                 style={{
-                  fontFamily: "var(--font-space-grotesk)",
-                  fontSize: "clamp(0.85rem, 2vw, 1rem)",
-                  textShadow: "0 0 16px rgba(0,212,255,0.4)",
+                  fontFamily: "var(--font-orbitron)",
+                  fontSize: "clamp(1.1rem, 3vw, 1.7rem)",
+                  color: "#00d4ff",
+                  textShadow: "0 0 20px rgba(0,212,255,0.5)",
                 }}
               >
-                {subtitleText}
-              </p>
-            )}
+                {sigDisplay.name}
+              </h2>
+
+              {/* Signature image */}
+              <div
+                className="rounded-2xl overflow-hidden"
+                style={{
+                  border: "2px solid rgba(0,212,255,0.25)",
+                  background: "#ffffff",
+                  padding: "6px 12px",
+                }}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={sigDisplay.data}
+                  alt={`Assinatura de ${sigDisplay.name}`}
+                  style={{
+                    width: "100%",
+                    maxHeight: 130,
+                    objectFit: "contain",
+                  }}
+                />
+              </div>
+
+              {/* Funny text */}
+              {subtitleText && (
+                <p
+                  className="text-white/90 leading-relaxed"
+                  style={{
+                    fontFamily: "var(--font-space-grotesk)",
+                    fontSize: "clamp(0.78rem, 1.8vw, 0.95rem)",
+                    textShadow: "0 0 16px rgba(0,212,255,0.4)",
+                  }}
+                >
+                  {subtitleText}
+                </p>
+              )}
+            </div>
           </div>
         </div>
       )}

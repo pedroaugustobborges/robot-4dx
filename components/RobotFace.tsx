@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 
-type Expression = "neutral" | "happy" | "curious" | "thinking" | "surprised";
+type Expression = "neutral" | "happy" | "curious" | "thinking" | "surprised" | "laughing";
 
 interface RobotFaceProps {
   isSpeaking: boolean;
@@ -106,6 +106,14 @@ export default function RobotFace({
             <path d="M 230 124 Q 262 112 298 128" {...style} />
           </>
         );
+      case "laughing":
+        // Eyebrows shoot up high from the laughter
+        return (
+          <>
+            <path d="M 98 112 Q 138 96 176 110" {...style} strokeWidth={6} />
+            <path d="M 224 110 Q 262 96 302 112" {...style} strokeWidth={6} />
+          </>
+        );
       case "thinking":
         return (
           <>
@@ -134,6 +142,23 @@ export default function RobotFace({
 
   // ── Mouth shape ──────────────────────────────────────────────────────────────
   const renderMouth = () => {
+    // Laughing: wide open oval, bigger base even at rest
+    if (expression === "laughing") {
+      const rx = 36 + mouthOpenness * 20;
+      const ry = 16 + mouthOpenness * 30;
+      return (
+        <ellipse
+          cx="200"
+          cy="306"
+          rx={rx}
+          ry={ry}
+          fill="#3d4a5c"
+          stroke="#7a8fa6"
+          strokeWidth="2.5"
+        />
+      );
+    }
+
     if (mouthOpenness < 0.08) {
       // Cute closed smile
       const smileD =
@@ -243,86 +268,153 @@ export default function RobotFace({
       {/* ── EYEBROWS ─────────────────────────────────────────── */}
       {renderEyebrows()}
 
-      {/* ── LEFT EYE ─────────────────────────────────────────── */}
-      <g clipPath="url(#leftEyeClip)">
-        {/* sclera */}
-        <circle cx="140" cy="193" r="52" fill="white" />
-        {/* pupil */}
-        <circle
-          cx={140 + pupilPos.lx}
-          cy={193 + pupilPos.ly}
-          r="36"
-          fill="url(#pupilGrad)"
-        />
-        {/* main shine */}
-        <circle
-          cx={152 + pupilPos.lx * 0.4}
-          cy={178 + pupilPos.ly * 0.4}
-          r="13"
-          fill="white"
-          opacity="0.92"
-        />
-        {/* small secondary shine */}
-        <circle
-          cx={160 + pupilPos.lx * 0.3}
-          cy={197 + pupilPos.ly * 0.3}
-          r="5"
-          fill="white"
-          opacity="0.45"
-        />
-      </g>
+      {/* ── EYES ─────────────────────────────────────────────── */}
+      {expression === "laughing" ? (
+        /* 😆 closed squinting eyes */
+        <>
+          {/* Left closed eye */}
+          <g>
+            {/* white sclera background so lines show cleanly on face */}
+            <ellipse cx="140" cy="198" rx="50" ry="22" fill="white" opacity="0.85" />
+            {/* upper squint arc — thick, curves upward = lid pressed down */}
+            <path
+              d="M 92 196 Q 140 158 188 196"
+              fill="none"
+              stroke="#3d4f61"
+              strokeWidth="10"
+              strokeLinecap="round"
+            />
+            {/* lower eyelid hint */}
+            <path
+              d="M 100 204 Q 140 216 180 204"
+              fill="none"
+              stroke="#7a8fa6"
+              strokeWidth="3.5"
+              strokeLinecap="round"
+              opacity="0.6"
+            />
+            {/* tiny shine dots for life */}
+            <circle cx="122" cy="176" r="4" fill="white" opacity="0.7" />
+            <circle cx="134" cy="170" r="2.5" fill="white" opacity="0.5" />
+          </g>
 
-      {/* ── RIGHT EYE ────────────────────────────────────────── */}
-      <g clipPath="url(#rightEyeClip)">
-        <circle cx="260" cy="193" r="52" fill="white" />
-        <circle
-          cx={260 + pupilPos.rx}
-          cy={193 + pupilPos.ry}
-          r="36"
-          fill="url(#pupilGrad)"
-        />
-        <circle
-          cx={272 + pupilPos.rx * 0.4}
-          cy={178 + pupilPos.ry * 0.4}
-          r="13"
-          fill="white"
-          opacity="0.92"
-        />
-        <circle
-          cx={280 + pupilPos.rx * 0.3}
-          cy={197 + pupilPos.ry * 0.3}
-          r="5"
-          fill="white"
-          opacity="0.45"
-        />
-      </g>
+          {/* Right closed eye */}
+          <g>
+            <ellipse cx="260" cy="198" rx="50" ry="22" fill="white" opacity="0.85" />
+            <path
+              d="M 212 196 Q 260 158 308 196"
+              fill="none"
+              stroke="#3d4f61"
+              strokeWidth="10"
+              strokeLinecap="round"
+            />
+            <path
+              d="M 220 204 Q 260 216 300 204"
+              fill="none"
+              stroke="#7a8fa6"
+              strokeWidth="3.5"
+              strokeLinecap="round"
+              opacity="0.6"
+            />
+            <circle cx="242" cy="176" r="4" fill="white" opacity="0.7" />
+            <circle cx="254" cy="170" r="2.5" fill="white" opacity="0.5" />
+          </g>
+        </>
+      ) : (
+        /* Normal open eyes */
+        <>
+          {/* ── LEFT EYE ─────────────────────────────────────── */}
+          <g clipPath="url(#leftEyeClip)">
+            <circle cx="140" cy="193" r="52" fill="white" />
+            <circle
+              cx={140 + pupilPos.lx}
+              cy={193 + pupilPos.ly}
+              r="36"
+              fill="url(#pupilGrad)"
+            />
+            <circle
+              cx={152 + pupilPos.lx * 0.4}
+              cy={178 + pupilPos.ly * 0.4}
+              r="13"
+              fill="white"
+              opacity="0.92"
+            />
+            <circle
+              cx={160 + pupilPos.lx * 0.3}
+              cy={197 + pupilPos.ly * 0.3}
+              r="5"
+              fill="white"
+              opacity="0.45"
+            />
+          </g>
+
+          {/* ── RIGHT EYE ────────────────────────────────────── */}
+          <g clipPath="url(#rightEyeClip)">
+            <circle cx="260" cy="193" r="52" fill="white" />
+            <circle
+              cx={260 + pupilPos.rx}
+              cy={193 + pupilPos.ry}
+              r="36"
+              fill="url(#pupilGrad)"
+            />
+            <circle
+              cx={272 + pupilPos.rx * 0.4}
+              cy={178 + pupilPos.ry * 0.4}
+              r="13"
+              fill="white"
+              opacity="0.92"
+            />
+            <circle
+              cx={280 + pupilPos.rx * 0.3}
+              cy={197 + pupilPos.ry * 0.3}
+              r="5"
+              fill="white"
+              opacity="0.45"
+            />
+          </g>
+        </>
+      )}
 
       {/* ── CHEEKS ───────────────────────────────────────────── */}
       {/* Left cheek — blurred base */}
       <ellipse
         cx="82"
-        cy="258"
-        rx="38"
-        ry="24"
+        cy={expression === "laughing" ? 248 : 258}
+        rx={expression === "laughing" ? 44 : 38}
+        ry={expression === "laughing" ? 28 : 24}
         fill="#ffb3c6"
-        opacity="0.45"
+        opacity={expression === "laughing" ? 0.75 : 0.45}
         filter="url(#cheekBlur)"
       />
       {/* Left cheek — sharp top */}
-      <ellipse cx="82" cy="258" rx="30" ry="18" fill="#ffb3c6" opacity="0.30" />
+      <ellipse
+        cx="82"
+        cy={expression === "laughing" ? 248 : 258}
+        rx={expression === "laughing" ? 36 : 30}
+        ry={expression === "laughing" ? 22 : 18}
+        fill="#ffb3c6"
+        opacity={expression === "laughing" ? 0.55 : 0.30}
+      />
 
       {/* Right cheek — blurred base */}
       <ellipse
         cx="318"
-        cy="258"
-        rx="38"
-        ry="24"
+        cy={expression === "laughing" ? 248 : 258}
+        rx={expression === "laughing" ? 44 : 38}
+        ry={expression === "laughing" ? 28 : 24}
         fill="#ffb3c6"
-        opacity="0.45"
+        opacity={expression === "laughing" ? 0.75 : 0.45}
         filter="url(#cheekBlur)"
       />
       {/* Right cheek — sharp top */}
-      <ellipse cx="318" cy="258" rx="30" ry="18" fill="#ffb3c6" opacity="0.30" />
+      <ellipse
+        cx="318"
+        cy={expression === "laughing" ? 248 : 258}
+        rx={expression === "laughing" ? 36 : 30}
+        ry={expression === "laughing" ? 22 : 18}
+        fill="#ffb3c6"
+        opacity={expression === "laughing" ? 0.55 : 0.30}
+      />
 
       {/* ── MOUTH ────────────────────────────────────────────── */}
       {renderMouth()}
