@@ -215,7 +215,7 @@ export default function AdminPage() {
         }),
       });
       const { text } = await res.json();
-      await insertCommand(text, "ai", "curious");
+      await insertCommand(text, "ai");
     } catch (e) {
       showToast("Erro ao gerar curiosidade", "error");
     }
@@ -234,7 +234,7 @@ export default function AdminPage() {
         }),
       });
       const { text } = await res.json();
-      await insertCommand(text, "ai", "curious");
+      await insertCommand(text, "ai");
     } catch (e) {
       showToast("Erro ao gerar pergunta", "error");
     }
@@ -253,7 +253,7 @@ export default function AdminPage() {
         }),
       });
       const { text } = await res.json();
-      await insertCommand(text, "ai", "happy");
+      await insertCommand(text, "ai");
     } catch (e) {
       showToast("Erro", "error");
     }
@@ -457,7 +457,7 @@ export default function AdminPage() {
               <button
                 key={i}
                 className="quick-cmd-btn"
-                onClick={() => insertCommand(cmd, "direct", "happy")}
+                onClick={() => insertCommand(cmd, "direct")}
                 disabled={isSending}
               >
                 {cmd}
