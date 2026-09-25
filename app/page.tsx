@@ -512,8 +512,8 @@ export default function RobotPage() {
       {/* ── SUBTITLE (what ÍRIS is saying) ────────── */}
       <div
         className="absolute bottom-24 left-1/2 z-10 text-center px-6"
-        style={{ display: sigDisplay ? "none" : undefined }}
         style={{
+          display: sigDisplay ? "none" : undefined,
           transform: "translateX(-50%)",
           width: "min(90vw, 700px)",
           minHeight: "3rem",
