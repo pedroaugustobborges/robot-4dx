@@ -1,0 +1,476 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --cyan-glow: #00d4ff;
+  --medical-green: #00e676;
+  --space-dark: #030b18;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #030b18;
+  color: #e2f8ff;
+  overflow-x: hidden;
+}
+
+/* Hide scrollbar for fullscreen */
+body:fullscreen,
+body:-webkit-full-screen,
+body:-moz-full-screen {
+  overflow: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: #030b18;
+}
+::-webkit-scrollbar-thumb {
+  background: #00d4ff44;
+  border-radius: 2px;
+}
+
+/* ===================== */
+/* ROBOT ANIMATIONS      */
+/* ===================== */
+
+@keyframes blink {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(0); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 8px #00d4ff) drop-shadow(0 0 16px #00d4ff66);
+  }
+  50% {
+    filter: drop-shadow(0 0 18px #00d4ff) drop-shadow(0 0 36px #00d4ffaa) drop-shadow(0 0 60px #00d4ff44);
+  }
+}
+
+@keyframes antenna-blink {
+  0%, 45%, 100% { opacity: 1; }
+  50% { opacity: 0.15; }
+}
+
+@keyframes mouth-open {
+  0% { d: path("M 145 330 Q 200 330 255 330"); }
+  100% { d: path("M 145 315 Q 200 360 255 315"); }
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); opacity: 0.05; }
+  50% { opacity: 0.12; }
+  100% { transform: translateY(100vh); opacity: 0.05; }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(100vh) translateX(0px) rotate(0deg);
+    opacity: 0;
+  }
+  5% { opacity: 1; }
+  90% { opacity: 0.6; }
+  100% {
+    transform: translateY(-50px) translateX(60px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes float2 {
+  0% {
+    transform: translateY(100vh) translateX(0px);
+    opacity: 0;
+  }
+  10% { opacity: 0.8; }
+  85% { opacity: 0.4; }
+  100% {
+    transform: translateY(-50px) translateX(-80px);
+    opacity: 0;
+  }
+}
+
+@keyframes glitch {
+  0%, 100% { clip-path: inset(0 0 100% 0); }
+  10% { clip-path: inset(20% 0 50% 0); transform: translateX(-2px); }
+  20% { clip-path: inset(60% 0 10% 0); transform: translateX(2px); }
+  30% { clip-path: inset(0 0 100% 0); }
+}
+
+@keyframes iris-glow-text {
+  0%, 100% {
+    text-shadow:
+      0 0 10px #00d4ff,
+      0 0 20px #00d4ff,
+      0 0 40px #00d4ff88;
+  }
+  50% {
+    text-shadow:
+      0 0 20px #00d4ff,
+      0 0 40px #00d4ff,
+      0 0 80px #00d4ffaa,
+      0 0 120px #00d4ff44;
+  }
+}
+
+@keyframes subtitle-appear {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes led-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+@keyframes scan-eye {
+  0%, 100% { transform: translateX(0) translateY(0); }
+  25% { transform: translateX(4px) translateY(-3px); }
+  50% { transform: translateX(-5px) translateY(2px); }
+  75% { transform: translateX(3px) translateY(4px); }
+}
+
+@keyframes holo-ring {
+  0% { transform: rotate(0deg) scale(1); opacity: 0.6; }
+  50% { transform: rotate(180deg) scale(1.05); opacity: 0.3; }
+  100% { transform: rotate(360deg) scale(1); opacity: 0.6; }
+}
+
+@keyframes data-stream {
+  0% { transform: translateY(0); opacity: 0.7; }
+  100% { transform: translateY(-20px); opacity: 0; }
+}
+
+/* ===================== */
+/* PARTICLE SYSTEM       */
+/* ===================== */
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.particle-1 {
+  width: 3px; height: 3px;
+  background: rgba(0, 212, 255, 0.6);
+  left: 5%;
+  animation: float 14s linear infinite;
+  animation-delay: 0s;
+}
+.particle-2 {
+  width: 2px; height: 2px;
+  background: rgba(0, 230, 118, 0.5);
+  left: 12%;
+  animation: float2 18s linear infinite;
+  animation-delay: -3s;
+}
+.particle-3 {
+  width: 4px; height: 4px;
+  background: rgba(0, 212, 255, 0.4);
+  left: 20%;
+  animation: float 12s linear infinite;
+  animation-delay: -6s;
+}
+.particle-4 {
+  width: 2px; height: 2px;
+  background: rgba(100, 200, 255, 0.7);
+  left: 28%;
+  animation: float2 16s linear infinite;
+  animation-delay: -1s;
+}
+.particle-5 {
+  width: 5px; height: 5px;
+  background: rgba(0, 212, 255, 0.3);
+  left: 35%;
+  animation: float 20s linear infinite;
+  animation-delay: -8s;
+}
+.particle-6 {
+  width: 2px; height: 2px;
+  background: rgba(0, 230, 118, 0.6);
+  left: 42%;
+  animation: float2 11s linear infinite;
+  animation-delay: -4s;
+}
+.particle-7 {
+  width: 3px; height: 3px;
+  background: rgba(0, 212, 255, 0.5);
+  left: 50%;
+  animation: float 15s linear infinite;
+  animation-delay: -9s;
+}
+.particle-8 {
+  width: 4px; height: 4px;
+  background: rgba(100, 180, 255, 0.4);
+  left: 58%;
+  animation: float2 19s linear infinite;
+  animation-delay: -2s;
+}
+.particle-9 {
+  width: 2px; height: 2px;
+  background: rgba(0, 212, 255, 0.7);
+  left: 65%;
+  animation: float 13s linear infinite;
+  animation-delay: -7s;
+}
+.particle-10 {
+  width: 3px; height: 3px;
+  background: rgba(0, 230, 118, 0.4);
+  left: 72%;
+  animation: float2 17s linear infinite;
+  animation-delay: -5s;
+}
+.particle-11 {
+  width: 5px; height: 5px;
+  background: rgba(0, 212, 255, 0.3);
+  left: 80%;
+  animation: float 10s linear infinite;
+  animation-delay: -11s;
+}
+.particle-12 {
+  width: 2px; height: 2px;
+  background: rgba(150, 220, 255, 0.6);
+  left: 87%;
+  animation: float2 14s linear infinite;
+  animation-delay: -3s;
+}
+.particle-13 {
+  width: 3px; height: 3px;
+  background: rgba(0, 212, 255, 0.5);
+  left: 93%;
+  animation: float 16s linear infinite;
+  animation-delay: -10s;
+}
+.particle-14 {
+  width: 4px; height: 4px;
+  background: rgba(0, 230, 118, 0.35);
+  left: 8%;
+  animation: float2 21s linear infinite;
+  animation-delay: -13s;
+}
+.particle-15 {
+  width: 2px; height: 2px;
+  background: rgba(0, 212, 255, 0.65);
+  left: 45%;
+  animation: float 9s linear infinite;
+  animation-delay: -2s;
+}
+.particle-16 {
+  width: 3px; height: 3px;
+  background: rgba(200, 240, 255, 0.4);
+  left: 60%;
+  animation: float2 15s linear infinite;
+  animation-delay: -6s;
+}
+.particle-17 {
+  width: 2px; height: 2px;
+  background: rgba(0, 212, 255, 0.5);
+  left: 75%;
+  animation: float 12s linear infinite;
+  animation-delay: -4s;
+}
+.particle-18 {
+  width: 4px; height: 4px;
+  background: rgba(0, 200, 180, 0.4);
+  left: 18%;
+  animation: float2 13s linear infinite;
+  animation-delay: -8s;
+}
+.particle-19 {
+  width: 2px; height: 2px;
+  background: rgba(0, 212, 255, 0.6);
+  left: 33%;
+  animation: float 22s linear infinite;
+  animation-delay: -15s;
+}
+.particle-20 {
+  width: 3px; height: 3px;
+  background: rgba(0, 230, 118, 0.5);
+  left: 90%;
+  animation: float2 10s linear infinite;
+  animation-delay: -1s;
+}
+
+/* ===================== */
+/* GLOW UTILITIES        */
+/* ===================== */
+
+.glow-cyan {
+  filter: drop-shadow(0 0 8px #00d4ff) drop-shadow(0 0 16px #00d4ff66);
+}
+
+.glow-text-cyan {
+  animation: iris-glow-text 3s ease-in-out infinite;
+}
+
+.glow-text-subtitle {
+  text-shadow: 0 0 6px #00d4ff88;
+}
+
+.robot-face-container {
+  animation: pulse-glow 4s ease-in-out infinite;
+}
+
+.subtitle-animate {
+  animation: subtitle-appear 0.4s ease-out forwards;
+}
+
+.scanline-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.scanline-overlay::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(transparent, rgba(0, 212, 255, 0.15), transparent);
+  animation: scanline 4s linear infinite;
+}
+
+/* ===================== */
+/* ADMIN PANEL           */
+/* ===================== */
+
+.admin-card {
+  background: rgba(12, 26, 46, 0.85);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+}
+
+.admin-card:hover {
+  border-color: rgba(0, 212, 255, 0.4);
+}
+
+.quick-cmd-btn {
+  background: rgba(0, 212, 255, 0.08);
+  border: 1px solid rgba(0, 212, 255, 0.25);
+  border-radius: 8px;
+  color: #a0e8ff;
+  font-size: 0.8rem;
+  padding: 10px 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+  line-height: 1.3;
+}
+
+.quick-cmd-btn:hover {
+  background: rgba(0, 212, 255, 0.2);
+  border-color: #00d4ff;
+  color: #fff;
+  box-shadow: 0 0 12px rgba(0, 212, 255, 0.3);
+}
+
+.quick-cmd-btn:active {
+  transform: scale(0.97);
+}
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 52px;
+  height: 28px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background: rgba(0, 212, 255, 0.2);
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  transition: 0.3s;
+  border-radius: 28px;
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 3px;
+  bottom: 3px;
+  background: #60a5fa;
+  transition: 0.3s;
+  border-radius: 50%;
+}
+
+input:checked + .toggle-slider {
+  background: rgba(0, 212, 255, 0.4);
+  border-color: #00d4ff;
+  box-shadow: 0 0 8px rgba(0, 212, 255, 0.5);
+}
+
+input:checked + .toggle-slider:before {
+  transform: translateX(24px);
+  background: #00d4ff;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.status-pending {
+  background: rgba(251, 191, 36, 0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(251, 191, 36, 0.3);
+}
+
+.status-done {
+  background: rgba(0, 230, 118, 0.15);
+  color: #00e676;
+  border: 1px solid rgba(0, 230, 118, 0.3);
+}
+
+.expression-btn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid rgba(0, 212, 255, 0.25);
+  background: rgba(0, 212, 255, 0.06);
+  color: #a0e8ff;
+}
+
+.expression-btn:hover {
+  background: rgba(0, 212, 255, 0.18);
+  border-color: #00d4ff;
+  color: white;
+}
+
+.expression-btn.active {
+  background: rgba(0, 212, 255, 0.3);
+  border-color: #00d4ff;
+  color: white;
+  box-shadow: 0 0 10px rgba(0, 212, 255, 0.4);
+}
