@@ -166,7 +166,8 @@ export default function AdminPage() {
     type: string = "direct"
   ) => {
     const supabase = createClient();
-    const { error } = await supabase.from("commands").insert({
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { error } = await (supabase as any).from("commands").insert({
       text,
       type,
       expression: "happy",

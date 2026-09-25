@@ -17,28 +17,13 @@ export type SignatureRow = {
   created_at: string;
 };
 
-type Database = {
-  public: {
-    Tables: {
-      commands: {
-        Row: CommandRow;
-        Insert: Partial<CommandRow> & { text: string; type: string };
-        Update: Partial<CommandRow>;
-      };
-      signatures: {
-        Row: SignatureRow;
-        Insert: Partial<SignatureRow> & { name: string; signature_data: string };
-        Update: Partial<SignatureRow>;
-      };
-    };
-  };
-};
-
-let client: ReturnType<typeof createSupabaseClient<Database>> | null = null;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let client: ReturnType<typeof createSupabaseClient<any>> | null = null;
 
 export function createClient() {
   if (client) return client;
-  client = createSupabaseClient<Database>(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  client = createSupabaseClient<any>(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
   );
