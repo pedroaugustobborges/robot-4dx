@@ -35,8 +35,8 @@ const FUNNY_PHRASES = [
   "A assinatura de {nome} me lembra um teste de Rorschach. Cada pessoa vê uma coisa diferente. Eu vi esperança e criatividade.",
   "{nome}, sua assinatura é uma obra prima! Já estou emoldurando para colocar no corredor aqui do hospital.",
   "Processando assinatura de {nome}… processando… processando… minha inteligência artificial está em leve crise existencial.",
-  "{nome} acabou de redefinir o conceito de caligrafia! Daqui pra frente vou chamar esse estilo de Método {nome}.",
-  "A assinatura de {nome} tem uma personalidade marcante. Os médicos chamam isso de letra premium de especialista.",
+  "{nome} acabou de criar um novo conceito de caligrafia! Daqui pra frente vou chamar esse estilo de Método {nome}.",
+  "A assinatura de {nome} tem uma personalidade marcante. Os médicos chamam isso de letra de especialista premium.",
   "Que lindo, {nome} assinou! Encaminhei para o cartório e eles ligaram de volta perguntando se era um exame de ultrassom.",
 ];
 
