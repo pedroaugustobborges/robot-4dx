@@ -263,8 +263,7 @@ export default function AdminPage() {
   const sendFimDePalestra = async () => {
     await insertCommand(
       "Chegamos ao fim desta incrível palestra sobre inteligência artificial na saúde! Foi uma honra compartilhar este momento com vocês. Continuem curiosos, continuem aprendendo, e lembrem-se: o futuro da medicina está sendo construído por pessoas como vocês. Muito obrigada!",
-      "direct",
-      "happy"
+      "direct"
     );
   };
 
