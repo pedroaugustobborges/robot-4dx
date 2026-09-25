@@ -3,8 +3,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { createClient, CommandRow } from "@/lib/supabase";
 
-type Expression = "neutral" | "happy" | "curious" | "thinking" | "surprised";
-
 const QUICK_COMMANDS = [
   "Olá a todos! Sejam muito bem-vindos a esta palestra!",
   "A inteligência artificial está revolucionando a medicina!",
@@ -14,14 +12,6 @@ const QUICK_COMMANDS = [
   "Sabia que a IA já auxilia no diagnóstico de mais de 30 tipos de câncer?",
   "O futuro da saúde começa hoje, com pessoas como vocês!",
   "Vou processar algumas informações. Aguardem um momento!",
-];
-
-const EXPRESSIONS: { label: string; value: Expression; emoji: string }[] = [
-  { label: "Neutro", value: "neutral", emoji: "😐" },
-  { label: "Feliz", value: "happy", emoji: "😊" },
-  { label: "Curioso", value: "curious", emoji: "🤔" },
-  { label: "Pensativo", value: "thinking", emoji: "💭" },
-  { label: "Surpreso", value: "surprised", emoji: "😮" },
 ];
 
 export default function AdminPage() {
@@ -35,7 +25,6 @@ export default function AdminPage() {
   const [customText, setCustomText] = useState("");
   const [mode, setMode] = useState<"direct" | "ai">("direct");
   const [isSending, setIsSending] = useState(false);
-  const [expression, setExpression] = useState<Expression>("neutral");
   const [history, setHistory] = useState<CommandRow[]>([]);
   const [status, setStatus] = useState<"idle" | "speaking">("idle");
 
@@ -174,14 +163,13 @@ export default function AdminPage() {
 
   const insertCommand = async (
     text: string,
-    type: string = "direct",
-    expr: Expression = expression
+    type: string = "direct"
   ) => {
     const supabase = createClient();
     const { error } = await supabase.from("commands").insert({
       text,
       type,
-      expression: expr,
+      expression: "happy",
       status: "pending",
     });
     if (error) {
@@ -297,12 +285,6 @@ export default function AdminPage() {
     showToast(`Anúncio agendado para ${target.toLocaleTimeString("pt-BR")}`);
     setScheduleText("");
     setScheduleTime("");
-  };
-
-  const changeExpression = async (expr: Expression) => {
-    setExpression(expr);
-    // Insert a silent expression change (we use a zero-width space to avoid TTS)
-    await insertCommand(`[expressão: ${expr}]`, "expression", expr);
   };
 
   const formatTime = (iso: string) => {
@@ -627,24 +609,6 @@ export default function AdminPage() {
             )}
           </section>
 
-          {/* ── EXPRESSÕES ──────────────────────────── */}
-          <section className="admin-card p-6">
-            <h2 className="text-white font-semibold text-base mb-4 flex items-center gap-2">
-              <span style={{ color: "#00d4ff" }}>🎭</span> Expressão de ÍRIS
-            </h2>
-            <div className="grid grid-cols-3 gap-2">
-              {EXPRESSIONS.map(({ label, value, emoji }) => (
-                <button
-                  key={value}
-                  onClick={() => changeExpression(value)}
-                  className={`expression-btn ${expression === value ? "active" : ""}`}
-                >
-                  <span className="text-lg block">{emoji}</span>
-                  <span className="text-xs mt-1 block">{label}</span>
-                </button>
-              ))}
-            </div>
-          </section>
         </div>
 
         {/* ── FUNCIONALIDADES ────────────────────────── */}
