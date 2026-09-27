@@ -444,7 +444,7 @@ export default function RobotPage() {
               className="robot-face-container"
               style={{ width: 280, height: 295, flexShrink: 0 }}
             >
-              <RobotFace isSpeaking={isSpeaking} expression="happy" />
+              <RobotFace isSpeaking={isSpeaking} expression="surprised" />
             </div>
 
             {/* ── Signature content ── */}

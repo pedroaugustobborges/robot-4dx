@@ -162,7 +162,7 @@ export default function RobotFace({
     if (mouthOpenness < 0.08) {
       // Cute closed smile
       const smileD =
-        expression === "happy"
+        expression === "happy" || expression === "surprised"
           ? "M 158 296 Q 200 328 242 296"
           : "M 164 294 Q 200 318 236 294";
       return (
@@ -303,41 +303,41 @@ export default function RobotFace({
       {/* Left cheek — blurred base */}
       <ellipse
         cx="82"
-        cy={expression === "laughing" ? 248 : 258}
-        rx={expression === "laughing" ? 44 : 38}
-        ry={expression === "laughing" ? 28 : 24}
+        cy={expression === "laughing" || expression === "surprised" ? 248 : 258}
+        rx={expression === "laughing" || expression === "surprised" ? 44 : 38}
+        ry={expression === "laughing" || expression === "surprised" ? 28 : 24}
         fill="#ffb3c6"
-        opacity={expression === "laughing" ? 0.75 : 0.45}
+        opacity={expression === "laughing" || expression === "surprised" ? 0.75 : 0.45}
         filter="url(#cheekBlur)"
       />
       {/* Left cheek — sharp top */}
       <ellipse
         cx="82"
-        cy={expression === "laughing" ? 248 : 258}
-        rx={expression === "laughing" ? 36 : 30}
-        ry={expression === "laughing" ? 22 : 18}
+        cy={expression === "laughing" || expression === "surprised" ? 248 : 258}
+        rx={expression === "laughing" || expression === "surprised" ? 36 : 30}
+        ry={expression === "laughing" || expression === "surprised" ? 22 : 18}
         fill="#ffb3c6"
-        opacity={expression === "laughing" ? 0.55 : 0.30}
+        opacity={expression === "laughing" || expression === "surprised" ? 0.55 : 0.30}
       />
 
       {/* Right cheek — blurred base */}
       <ellipse
         cx="318"
-        cy={expression === "laughing" ? 248 : 258}
-        rx={expression === "laughing" ? 44 : 38}
-        ry={expression === "laughing" ? 28 : 24}
+        cy={expression === "laughing" || expression === "surprised" ? 248 : 258}
+        rx={expression === "laughing" || expression === "surprised" ? 44 : 38}
+        ry={expression === "laughing" || expression === "surprised" ? 28 : 24}
         fill="#ffb3c6"
-        opacity={expression === "laughing" ? 0.75 : 0.45}
+        opacity={expression === "laughing" || expression === "surprised" ? 0.75 : 0.45}
         filter="url(#cheekBlur)"
       />
       {/* Right cheek — sharp top */}
       <ellipse
         cx="318"
-        cy={expression === "laughing" ? 248 : 258}
-        rx={expression === "laughing" ? 36 : 30}
-        ry={expression === "laughing" ? 22 : 18}
+        cy={expression === "laughing" || expression === "surprised" ? 248 : 258}
+        rx={expression === "laughing" || expression === "surprised" ? 36 : 30}
+        ry={expression === "laughing" || expression === "surprised" ? 22 : 18}
         fill="#ffb3c6"
-        opacity={expression === "laughing" ? 0.55 : 0.30}
+        opacity={expression === "laughing" || expression === "surprised" ? 0.55 : 0.30}
       />
 
       {/* ── MOUTH ────────────────────────────────────────────── */}
