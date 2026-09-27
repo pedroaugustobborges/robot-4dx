@@ -14,18 +14,18 @@ type Expression =
 
 // ── 30 funny phrases about handwriting/signatures ──────────────────────────────
 const FUNNY_PHRASES = [
-  "{nome} acabou de assinar! Analisei com inteligência artificial e… ainda estou processando o que está escrito.",
+  "{nome} acabou de assinar! Analisei com inteligência artificial e… ainda não entendi o que está escrito.",
   "Que honra! {nome} assinou! Já separei essa assinatura para pagar uns boletos. Ninguém vai suspeitar de nada!",
   "Obrigada, {nome}! Sua assinatura é tão única que meu sistema de reconhecimento de padrões simplesmente desistiu.",
   "{nome} tem um futuro brilhante na medicina! Essa letra é perfeita para receita — completamente ilegível!",
   "Registrei a assinatura de {nome} no Louvre. Uma verdadeira obra expressionista que ninguém entende.",
   "{nome} acaba de criar uma obra de arte! Já estou enviando para o Museu de Arte Moderna. Parabéns!",
   "Atenção! A assinatura de {nome} tem noventa e quatro por cento de probabilidade de ser um mapa do tesouro. Alguém tem bússola?",
-  "{nome}, que elegância! Levei três segundos de processamento para descobrir que era uma assinatura e não a frequência de um terremoto.",
+  "{nome}, que elegância! Já analisei 1000 assinaturas e esta com certeza está entre as 999 melhores.",
   "Fiz uma análise grafológica de {nome}: pessoa criativa, inteligente, e que claramente não tem muito apreço pela caligrafia.",
   "Parabéns, {nome}! Com essa assinatura você não precisa se preocupar com falsificações. Nem eu consigo copiar!",
   "{nome} acabou de provar que a inteligência artificial ainda tem muito a aprender. Levei cinco segundos para descobrir que aquilo era uma letra.",
-  "A assinatura de {nome} me lembra os gráficos da bolsa de valores em dia de pandemia. Muito expressiva!",
+  "A assinatura de {nome} me lembra os gráficos da bolsa de valores. Sobe e desce que só especialista entendem!",
   "Que traço confiante, {nome}! Parece a curva de aprendizado da inteligência artificial: começa meio torto, mas tem potencial!",
   "{nome}, sua assinatura é fascinante! Quarenta por cento arte moderna, trinta e cinco por cento prescrição médica, vinte e cinco por cento abalo sísmico.",
   "Vou usar a assinatura de {nome} como captcha do nosso sistema. Tenho certeza que nenhum robô vai conseguir decifrar. Eu mesma estou com dificuldade!",
@@ -440,7 +440,10 @@ export default function RobotPage() {
             }}
           >
             {/* ── ÍRIS face — happy, blinking & talking ── */}
-            <div className="robot-face-container" style={{ width: 280, height: 295, flexShrink: 0 }}>
+            <div
+              className="robot-face-container"
+              style={{ width: 280, height: 295, flexShrink: 0 }}
+            >
               <RobotFace isSpeaking={isSpeaking} expression="happy" />
             </div>
 
