@@ -185,8 +185,8 @@ export default function RobotPage() {
     const sig = sigQueueRef.current.shift()!;
     sigProcessingRef.current = true;
 
-    // Switch to laughing expression and show signature
-    setExpression("laughing");
+    // Keep happy expression during roast
+    setExpression("happy");
     setSigDisplay({ name: sig.name, data: sig.signature_data });
 
     // Speak the funny phrase (goes through the normal speak queue)
@@ -439,9 +439,9 @@ export default function RobotPage() {
                 "subtitle-pop 0.4s cubic-bezier(0.34,1.56,0.64,1) both",
             }}
           >
-            {/* ── ÍRIS face — laughing, blinking & talking ── */}
-            <div style={{ width: 280, height: 295, flexShrink: 0 }}>
-              <RobotFace isSpeaking={isSpeaking} expression="laughing" />
+            {/* ── ÍRIS face — happy, blinking & talking ── */}
+            <div className="robot-face-container" style={{ width: 280, height: 295, flexShrink: 0 }}>
+              <RobotFace isSpeaking={isSpeaking} expression="happy" />
             </div>
 
             {/* ── Signature content ── */}
