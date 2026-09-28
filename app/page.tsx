@@ -34,7 +34,7 @@ const FUNNY_PHRASES = [
   "Pronto, {nome} registrado com sucesso! Minha câmera ficou com tonteira tentando ler, mas conseguimos na terceira tentativa!",
   "{nome}, que economia de tinta! Em apenas alguns traços você disse tudo. Eu só não sei o quê. Mas foi lindo!",
   "A assinatura de {nome} é tão especial que meu algoritmo de reconhecimento pediu férias logo depois de analisá-la.",
-  "{nome} acabou de assinar! Olha que coincidência: o gráfico de variação climática dos últimos cem anos ficou idêntico à assinatura!",
+  "{nome} acabou de assinar! E é tão 'única' que eu duvido que seja capaz de fazer uma assinatura dessa novamente!",
   "Que charme, {nome}! Uma assinatura tão única que já está sendo estudada pela NASA como possível mensagem extraterrestre.",
   "Erro quatrocentos e quatro: letra de {nome} não encontrada. Tentando novamente… tentando… desistindo com muito carinho.",
   "{nome}, com essa assinatura você está aprovado para Ministro da Saúde. A letra é completamente regulamentar!",
@@ -402,7 +402,7 @@ export default function RobotPage() {
               letterSpacing: "0.3em",
             }}
           >
-            IAS
+            IASS
           </h1>
           <p
             className="text-cyan-400/60 tracking-wider mt-1 select-none"
@@ -412,7 +412,7 @@ export default function RobotPage() {
               letterSpacing: "0.2em",
             }}
           >
-            Inteligência Artificial Segura
+            Inteligência Artificial Segura em Saúde
           </p>
         </div>
       </div>
@@ -439,7 +439,7 @@ export default function RobotPage() {
                 "subtitle-pop 0.4s cubic-bezier(0.34,1.56,0.64,1) both",
             }}
           >
-            {/* ── IAS face — happy, blinking & talking ── */}
+            {/* ── IASS face — happy, blinking & talking ── */}
             <div
               className="robot-face-container"
               style={{ width: 280, height: 295, flexShrink: 0 }}
@@ -512,7 +512,7 @@ export default function RobotPage() {
         </div>
       )}
 
-      {/* ── SUBTITLE (what IAS is saying) ────────── */}
+      {/* ── SUBTITLE (what IASS is saying) ────────── */}
       <div
         className="absolute bottom-24 left-1/2 z-10 text-center px-6"
         style={{
@@ -738,7 +738,7 @@ export default function RobotPage() {
               letterSpacing: "0.35em",
             }}
           >
-            IAS
+            IASS
           </h1>
           <p
             className="text-center mb-2"
@@ -749,7 +749,7 @@ export default function RobotPage() {
               fontFamily: "var(--font-space-grotesk)",
             }}
           >
-            Inteligência Artificial Segura
+            Inteligência Artificial Segura em Saúde
           </p>
           <p
             className="text-center mb-12"
@@ -793,7 +793,7 @@ export default function RobotPage() {
                 "linear-gradient(135deg, rgba(0,212,255,0.15), rgba(0,212,255,0.05))";
             }}
           >
-            ▶ INICIAR IAS
+            ▶ INICIAR IASS
           </button>
 
           <p

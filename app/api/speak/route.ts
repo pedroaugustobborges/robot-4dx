@@ -3,9 +3,9 @@ import { NextRequest } from "next/server";
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-// Style instructions for IAS — energetic, warm, natural Brazilian Portuguese
+// Style instructions for IASS — energetic, warm, natural Brazilian Portuguese
 const VOICE_INSTRUCTIONS = `
-Você é IAS, uma assistente robô de inteligência artificial super animada, carismática e calorosa,
+Você é IASS, uma assistente robô de inteligência artificial super animada, carismática e calorosa,
 apresentando uma palestra sobre IA na saúde em um hospital no Brasil.
 
 Fale em português brasileiro com uma voz expressiva, energética e cheia de vida — como uma

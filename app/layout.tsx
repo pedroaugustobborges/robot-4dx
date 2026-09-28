@@ -15,11 +15,11 @@ const orbitron = Orbitron({
 });
 
 export const metadata: Metadata = {
-  title: "IAS – Inteligência Artificial Segura",
+  title: "IASS – Inteligência Artificial Segura em Saúde",
   description:
     "Robô de Inteligência Artificial para palestras sobre IA na Saúde",
   keywords: ["IA", "saúde", "robô", "inteligência artificial", "medicina"],
-  authors: [{ name: "IAS Robot" }],
+  authors: [{ name: "IASS Robot" }],
 };
 
 export const viewport: Viewport = {

@@ -304,7 +304,7 @@ export default function AdminPage() {
               className="glow-text-cyan font-black tracking-widest mb-2"
               style={{ fontFamily: "var(--font-orbitron)", fontSize: "2.5rem", color: "#00d4ff" }}
             >
-              IAS
+              IASS
             </h1>
             <p style={{ color: "#00d4ff66", fontSize: "0.8rem", letterSpacing: "0.2em" }}>
               PAINEL DE CONTROLE
@@ -409,7 +409,7 @@ export default function AdminPage() {
             className="font-black tracking-widest"
             style={{ fontFamily: "var(--font-orbitron)", color: "#00d4ff", fontSize: "1.4rem" }}
           >
-            IAS
+            IASS
           </h1>
           <div className="hidden sm:block" style={{ color: "#ffffff30", fontSize: "1rem" }}>|</div>
           <span className="hidden sm:block text-sm" style={{ color: "#ffffff50", letterSpacing: "0.1em" }}>
@@ -418,14 +418,14 @@ export default function AdminPage() {
         </div>
 
         <div className="flex items-center gap-4">
-          {/* IAS status */}
+          {/* IASS status */}
           <div className="flex items-center gap-2">
             <div
               className="w-2 h-2 rounded-full"
               style={{ background: "#00e676", boxShadow: "0 0 8px #00e676", animation: "led-pulse 2s ease-in-out infinite" }}
             />
             <span className="text-xs" style={{ color: "#00e676", fontFamily: "var(--font-orbitron)", letterSpacing: "0.1em" }}>
-              IAS ONLINE
+              IASS ONLINE
             </span>
           </div>
 
@@ -473,7 +473,7 @@ export default function AdminPage() {
           <textarea
             value={customText}
             onChange={(e) => setCustomText(e.target.value)}
-            placeholder={mode === "direct" ? "Digite o texto que IAS vai falar..." : "Digite uma instrução para a IA gerar a fala de IAS..."}
+            placeholder={mode === "direct" ? "Digite o texto que IASS vai falar..." : "Digite uma instrução para a IA gerar a fala de IASS..."}
             rows={3}
             className="w-full px-4 py-3 rounded-lg text-white outline-none resize-none mb-4"
             style={{
@@ -528,7 +528,7 @@ export default function AdminPage() {
             </button>
           </div>
           <p className="text-xs mt-2" style={{ color: "#ffffff30" }}>
-            {mode === "direct" ? "Texto enviado diretamente para IAS falar." : "IA irá gerar fala natural baseada na sua instrução."}
+            {mode === "direct" ? "Texto enviado diretamente para IASS falar." : "IA irá gerar fala natural baseada na sua instrução."}
             {" "}Ctrl+Enter para enviar.
           </p>
         </section>
@@ -545,7 +545,7 @@ export default function AdminPage() {
               <div>
                 <p className="text-sm text-white">Auto-Greet</p>
                 <p className="text-xs mt-0.5" style={{ color: "#ffffff40" }}>
-                  IAS observa a plateia e saúda automaticamente
+                  IASS observa a plateia e saúda automaticamente
                 </p>
               </div>
               <label className="toggle-switch">
@@ -769,7 +769,7 @@ export default function AdminPage() {
         {/* Footer */}
         <div className="pb-8 text-center">
           <p className="text-xs" style={{ color: "#ffffff15" }}>
-            IAS — Inteligência Artificial Segura • Sistema de Controle v1.0
+            IASS — Inteligência Artificial Segura em Saúde • Sistema de Controle v1.0
           </p>
         </div>
       </div>

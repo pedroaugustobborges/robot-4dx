@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
             },
             {
               type: "text",
-              text: `Você é IAS, uma robô de inteligência artificial em uma palestra sobre IA na saúde em um hospital brasileiro.
+              text: `Você é IASS, uma robô de inteligência artificial em uma palestra sobre IA na saúde em um hospital brasileiro.
 Observe esta imagem da audiência e crie UMA saudação calorosa, profissional e específica em português brasileiro.
 Mencione o que você observa (aproximadamente quantas pessoas, onde estão, o ambiente, etc.).
 Seja criativa, simpática e profissional. Máximo 2 frases.
