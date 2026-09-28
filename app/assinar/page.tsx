@@ -144,7 +144,7 @@ export default function AssinarPage() {
           background: "linear-gradient(160deg, #020a16 0%, #030b18 100%)",
         }}
       >
-        {/* ÍRIS face */}
+        {/* IAS face */}
         <div style={{ width: 200, height: 210 }}>
           <RobotFace isSpeaking={false} expression="happy" />
         </div>
@@ -216,7 +216,7 @@ export default function AssinarPage() {
         background: "linear-gradient(160deg, #020a16 0%, #030b18 100%)",
       }}
     >
-      {/* ── Header: ÍRIS face + welcome ───────────────── */}
+      {/* ── Header: IAS face + welcome ───────────────── */}
       <div className="flex flex-col items-center mb-6">
         <div style={{ width: 160, height: 168 }}>
           <RobotFace isSpeaking={false} expression="happy" />
@@ -232,7 +232,7 @@ export default function AssinarPage() {
               letterSpacing: "0.25em",
             }}
           >
-            ÍRIS
+            IAS
           </h1>
           <p
             className="mt-2 text-cyan-100 leading-snug"
@@ -376,7 +376,7 @@ export default function AssinarPage() {
         className="mt-6 text-center text-cyan-400/40 text-xs"
         style={{ fontFamily: "var(--font-space-grotesk)" }}
       >
-        ÍRIS · Inteligência Robótica em Saúde
+        IAS · Inteligência Artificial Segura
       </p>
     </div>
   );

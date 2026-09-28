@@ -402,7 +402,7 @@ export default function RobotPage() {
               letterSpacing: "0.3em",
             }}
           >
-            ÍRIS
+            IAS
           </h1>
           <p
             className="text-cyan-400/60 tracking-wider mt-1 select-none"
@@ -412,7 +412,7 @@ export default function RobotPage() {
               letterSpacing: "0.2em",
             }}
           >
-            Inteligência Robótica em Saúde
+            Inteligência Artificial Segura
           </p>
         </div>
       </div>
@@ -439,7 +439,7 @@ export default function RobotPage() {
                 "subtitle-pop 0.4s cubic-bezier(0.34,1.56,0.64,1) both",
             }}
           >
-            {/* ── ÍRIS face — happy, blinking & talking ── */}
+            {/* ── IAS face — happy, blinking & talking ── */}
             <div
               className="robot-face-container"
               style={{ width: 280, height: 295, flexShrink: 0 }}
@@ -512,7 +512,7 @@ export default function RobotPage() {
         </div>
       )}
 
-      {/* ── SUBTITLE (what ÍRIS is saying) ────────── */}
+      {/* ── SUBTITLE (what IAS is saying) ────────── */}
       <div
         className="absolute bottom-24 left-1/2 z-10 text-center px-6"
         style={{
@@ -738,7 +738,7 @@ export default function RobotPage() {
               letterSpacing: "0.35em",
             }}
           >
-            ÍRIS
+            IAS
           </h1>
           <p
             className="text-center mb-2"
@@ -749,7 +749,7 @@ export default function RobotPage() {
               fontFamily: "var(--font-space-grotesk)",
             }}
           >
-            Inteligência Robótica em Saúde
+            Inteligência Artificial Segura
           </p>
           <p
             className="text-center mb-12"
@@ -793,7 +793,7 @@ export default function RobotPage() {
                 "linear-gradient(135deg, rgba(0,212,255,0.15), rgba(0,212,255,0.05))";
             }}
           >
-            ▶ INICIAR ÍRIS
+            ▶ INICIAR IAS
           </button>
 
           <p
