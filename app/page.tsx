@@ -16,22 +16,35 @@ type Expression =
 const VIP_JOKES: Array<{ keywords: string[][]; joke: string }> = [
   {
     // Adriana Martins de Lucena — may write "ADRIANA MARTINS" or "ADRIANA DE LUCENA"
-    keywords: [["ADRIANA", "MARTINS"], ["ADRIANA", "LUCENA"]],
+    keywords: [
+      ["ADRIANA", "MARTINS"],
+      ["ADRIANA", "LUCENA"],
+    ],
     joke: "Que honra! {nome} assinou! Já separei essa assinatura para pagar uns boletos. Ninguém vai suspeitar de nada!",
   },
   {
     // Anderson Karllos Gabriel Gomes — may write "ANDERSON GOMES" or "ANDERSON KARLLOS"
-    keywords: [["ANDERSON", "KARLLOS"], ["ANDERSON", "GOMES"]],
+    keywords: [
+      ["ANDERSON", "KARLLOS"],
+      ["ANDERSON", "GOMES"],
+    ],
     joke: "Que garranchos que o {nome} fez. Mais feio que isso somente jogos do Vila Nova Futebol Clube.",
   },
   {
     // Luiz Henrique de Moura Santana — may write "LUIZ HENRIQUE" or "LUIZ SANTANA"
-    keywords: [["LUIZ", "HENRIQUE"], ["LUIZ", "SANTANA"], ["LUIZ", "MOURA"]],
+    keywords: [
+      ["LUIZ", "HENRIQUE"],
+      ["LUIZ", "SANTANA"],
+      ["LUIZ", "MOURA"],
+    ],
     joke: "Salvando a assinatura de {nome}. Com essa aqui eu invado qualquer sistema do hospital!",
   },
   {
     // Lucas Machado de Oliveira — may write "LUCAS MACHADO" or "LUCAS OLIVEIRA"
-    keywords: [["LUCAS", "MACHADO"], ["LUCAS", "OLIVEIRA"]],
+    keywords: [
+      ["LUCAS", "MACHADO"],
+      ["LUCAS", "OLIVEIRA"],
+    ],
     joke: "Finalmente uma assinatura perfeitinha. Vou usar a assinatura de {nome} para vender quadros piratas de Leonardo da Vinci.",
   },
   {
@@ -42,6 +55,16 @@ const VIP_JOKES: Array<{ keywords: string[][]; joke: string }> = [
       ["FELIPE", "RODRIGUES"],
     ],
     joke: "É fácil identificar a assinatura de um membro do fã clube Luan Santana. Te deram um sol, te deram um mar, mas não deram um caderno de caligrafia.",
+  },
+
+  {
+    // IONE RODRIGUES DE OLIVEIRA — may write "IONE RODRIGUES", "OLIVEIRA", etc.
+    keywords: [
+      ["IONE", "RODRIGUES"],
+      ["IONE", "OLIVEIRA"],
+      ["IONE", "DE OLIVEIRA"],
+    ],
+    joke: "Quem liga para cybersecurity? Eu quero é cyber skincare! A assinatura de {nome} usarei para renovar meu plano WePink.",
   },
 ];
 
