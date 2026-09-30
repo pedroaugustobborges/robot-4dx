@@ -77,7 +77,7 @@ const VIP_JOKES: Array<{ keywords: string[][]; joke: string }> = [
       ["KÁSSYLLA", "SANTOS"],
       ["KÁSSYLLA", "DOS SANTOS"],
     ],
-    joke: "Eita. Com certeza a qualidade da caligrafia de {nome} não faz parte dos requisitos ONA. Senão... Hahaha",
+    joke: "Eita. Com certeza a qualidade da caligrafia de {nome} não faz parte dos requisitos ONA. Senão... HAHAHAHA",
   },
 ];
 
