@@ -12,20 +12,64 @@ type Expression =
   | "surprised"
   | "laughing";
 
-// ── 30 funny phrases about handwriting/signatures ──────────────────────────────
+// ── VIP jokes — triggered by partial name matching ────────────────────────────
+const VIP_JOKES: Array<{ keywords: string[][]; joke: string }> = [
+  {
+    // Adriana Martins de Lucena — may write "ADRIANA MARTINS" or "ADRIANA DE LUCENA"
+    keywords: [["ADRIANA", "MARTINS"], ["ADRIANA", "LUCENA"]],
+    joke: "Que honra! {nome} assinou! Já separei essa assinatura para pagar uns boletos. Ninguém vai suspeitar de nada!",
+  },
+  {
+    // Anderson Karllos Gabriel Gomes — may write "ANDERSON GOMES" or "ANDERSON KARLLOS"
+    keywords: [["ANDERSON", "KARLLOS"], ["ANDERSON", "GOMES"]],
+    joke: "Que garranchos que o {nome} fez. Mais feio que isso somente jogos do Vila Nova Futebol Clube.",
+  },
+  {
+    // Luiz Henrique de Moura Santana — may write "LUIZ HENRIQUE" or "LUIZ SANTANA"
+    keywords: [["LUIZ", "HENRIQUE"], ["LUIZ", "SANTANA"], ["LUIZ", "MOURA"]],
+    joke: "Salvando a assinatura de {nome}. Com essa aqui eu invado qualquer sistema do hospital!",
+  },
+  {
+    // Lucas Machado de Oliveira — may write "LUCAS MACHADO" or "LUCAS OLIVEIRA"
+    keywords: [["LUCAS", "MACHADO"], ["LUCAS", "OLIVEIRA"]],
+    joke: "Finalmente uma assinatura perfeitinha. Vou usar a assinatura de {nome} para vender quadros piratas de Leonardo da Vinci.",
+  },
+  {
+    // Felipe Borges Amaral Rodrigues — may write "FELIPE BORGES", "FELIPE AMARAL", etc.
+    keywords: [
+      ["FELIPE", "BORGES"],
+      ["FELIPE", "AMARAL"],
+      ["FELIPE", "RODRIGUES"],
+    ],
+    joke: "É fácil identificar a assinatura de um membro do fã clube Luan Santana. Te deram um sol, te deram um mar, mas não deram um caderno de caligrafia.",
+  },
+];
+
+function getVIPJoke(name: string): string | null {
+  const upper = name.toUpperCase();
+  for (const vip of VIP_JOKES) {
+    for (const group of vip.keywords) {
+      if (group.every((kw) => upper.includes(kw))) {
+        return vip.joke.replace(/\{nome\}/g, name);
+      }
+    }
+  }
+  return null;
+}
+
+// ── 29 funny phrases about handwriting/signatures ──────────────────────────────
 const FUNNY_PHRASES = [
   "{nome} acabou de assinar! Analisei com inteligência artificial e… ainda não entendi o que está escrito.",
-  "Que honra! {nome} assinou! Já separei essa assinatura para pagar uns boletos. Ninguém vai suspeitar de nada!",
   "Obrigada, {nome}! Sua assinatura é tão única que meu sistema de reconhecimento de padrões simplesmente desistiu.",
   "{nome} tem um futuro brilhante na medicina! Essa letra é perfeita para receita: completamente ilegível!",
   "Registrei a assinatura de {nome} no Louvre. Uma verdadeira obra expressionista que ninguém entende.",
   "{nome} acaba de criar uma obra de arte! Já estou enviando para o Museu de Arte Moderna. Parabéns!",
   "Atenção! A assinatura de {nome} tem noventa e quatro por cento de probabilidade de ser um mapa do tesouro. Alguém tem bússola?",
   "{nome}, que elegância! Já analisei 1000 assinaturas e esta com certeza está entre as 999 melhores.",
-  "Fiz uma análise grafológica de {nome}: pessoa criativa, inteligente, e que claramente não tem muito apreço pela caligrafia.",
+  "Fiz uma análise grafológica de {nome}: pessoa criativa, inteligente e que claramente fugiu das aulas de caligrafia.",
   "Parabéns, {nome}! Com essa assinatura você não precisa se preocupar com falsificações. Nem eu consigo copiar!",
   "{nome} acabou de provar que a inteligência artificial ainda tem muito a aprender. Levei cinco segundos para descobrir que aquilo era uma letra.",
-  "A assinatura de {nome} me lembra os gráficos da bolsa de valores. Sobe e desce que só especialista entendem!",
+  "A assinatura de {nome} me lembra os gráficos da bolsa de valores. Sobe e desce que só especialista entende!",
   "Que traço confiante, {nome}! Parece a curva de aprendizado da inteligência artificial: começa meio torto, mas tem potencial!",
   "{nome}, sua assinatura é fascinante! Quarenta por cento arte moderna, trinta e cinco por cento prescrição médica, vinte e cinco por cento abalo sísmico.",
   "Vou usar a assinatura de {nome} como captcha do nosso sistema. Tenho certeza que nenhum robô vai conseguir decifrar. Eu mesma estou com dificuldade!",
@@ -47,6 +91,8 @@ const FUNNY_PHRASES = [
 ];
 
 function getFunnyPhrase(name: string): string {
+  const vipJoke = getVIPJoke(name);
+  if (vipJoke) return vipJoke;
   const template =
     FUNNY_PHRASES[Math.floor(Math.random() * FUNNY_PHRASES.length)];
   return template.replace(/\{nome\}/g, name);
