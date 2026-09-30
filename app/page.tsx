@@ -66,6 +66,16 @@ const VIP_JOKES: Array<{ keywords: string[][]; joke: string }> = [
     ],
     joke: "Quem liga para cybersecurity? Eu quero é cyber skincare! A assinatura de {nome} usarei para renovar meu plano WePink.",
   },
+
+  {
+    // KASSYLLA FERREIRA DOS SANTOS — may write "KASSYLLA FERREIRA", "SANTOS", etc.
+    keywords: [
+      ["KASSYLLA", "FERREIRA"],
+      ["KASSYLLA", "SANTOS"],
+      ["KASSYLLA", "DOS SANTOS"],
+    ],
+    joke: "Eita. Espero que a qualidade da assinatura de {nome} não seja um requisito ONA.",
+  },
 ];
 
 function getVIPJoke(name: string): string | null {
