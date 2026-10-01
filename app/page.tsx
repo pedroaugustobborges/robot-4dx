@@ -361,21 +361,21 @@ export default function RobotPage() {
             sigQueueRef.current.push(sig);
             processNextSignature();
           }, 60000);
-          // VIPs get repeat jokes at 4min and 10min after signing
+          // VIPs get repeat jokes at 5min and 12min after signing
           if (getVIPJoke(sig.name)) {
             setTimeout(
               () => {
                 sigQueueRef.current.push(sig);
                 processNextSignature();
               },
-              4 * 60 * 1000,
+              5 * 60 * 1000,
             );
             setTimeout(
               () => {
                 sigQueueRef.current.push(sig);
                 processNextSignature();
               },
-              10 * 60 * 1000,
+              12 * 60 * 1000,
             );
           }
         },
