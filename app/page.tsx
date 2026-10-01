@@ -22,6 +22,16 @@ const VIP_JOKES: Array<{ keywords: string[][]; joke: string }> = [
     ],
     joke: "Que honra! {nome} assinou! Já separei essa assinatura para pagar uns boletos. Ninguém vai suspeitar de nada!",
   },
+
+  {
+    // VANESSA MARIA DE QUEIROZ — may write "VANESSA MARIA" or "VANESSA QUEIROZ"
+    keywords: [
+      ["VANESSA", "MARIA"],
+      ["VANESSA", "QUEIROZ"],
+    ],
+    joke: "Usarei a assinatura de {nome} para fazer um pix para todo mundo presente aqui no auditório!",
+  },
+
   {
     // Anderson Karllos Gabriel Gomes — may write "ANDERSON GOMES" or "ANDERSON KARLLOS"
     keywords: [
@@ -99,7 +109,7 @@ const VIP_JOKES: Array<{ keywords: string[][]; joke: string }> = [
       ["ANA", "RIBEIRO"],
       ["ANA", "KENES"],
     ],
-    joke: "A assinatura de {nome} é valiosa. Muita gente pede ajuda para melhorar o XPS na 4DX. Com essa assinatura não precisa fazer nada.",
+    joke: "A assinatura de {nome} é valiosa. Muita gente pede ajuda para melhorar o XPS na 4DX. Com essa assinatura, eu posso ajudar muito mais.",
   },
 
   {
@@ -112,15 +122,6 @@ const VIP_JOKES: Array<{ keywords: string[][]; joke: string }> = [
     ],
     joke: "A assinatura de {nome} é valiosa. Muita gente pede ajuda para melhorar o XPS na 4DX. Com essa assinatura não precisa fazer nada.",
   },
-
-
-
-
-];
-
-
-
-
 ];
 
 function getVIPJoke(name: string): string | null {
@@ -355,11 +356,28 @@ export default function RobotPage() {
         { event: "INSERT", schema: "public", table: "signatures" },
         (payload) => {
           const sig = payload.new as PendingSignature;
-          // Wait 30 seconds before displaying (person needs time to sit down)
+          // Wait 1 minute before displaying (person needs time to sit down)
           setTimeout(() => {
             sigQueueRef.current.push(sig);
             processNextSignature();
-          }, 30000);
+          }, 60000);
+          // VIPs get repeat jokes at 4min and 10min after signing
+          if (getVIPJoke(sig.name)) {
+            setTimeout(
+              () => {
+                sigQueueRef.current.push(sig);
+                processNextSignature();
+              },
+              4 * 60 * 1000,
+            );
+            setTimeout(
+              () => {
+                sigQueueRef.current.push(sig);
+                processNextSignature();
+              },
+              10 * 60 * 1000,
+            );
+          }
         },
       )
       .subscribe();
