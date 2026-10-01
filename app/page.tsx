@@ -77,8 +77,50 @@ const VIP_JOKES: Array<{ keywords: string[][]; joke: string }> = [
       ["KÁSSYLLA", "SANTOS"],
       ["KÁSSYLLA", "DOS SANTOS"],
     ],
-    joke: "Eita. Com certeza a qualidade da caligrafia de {nome} não faz parte dos requisitos ONA. Senão... HAHAHAHA",
+    joke: "Eita. Felizmente pela minha pesquisa a qualidade da caligrafia de {nome} não faz parte dos requisitos da ONA.",
   },
+
+  {
+    // RENATA SANTOS DE OLIVEIRA ALVES — may write "RENATA SANTOS", "RENATA ALVES", etc.
+    keywords: [
+      ["RENATA", "DE OLIVEIRA"],
+      ["RENATA", "SANTOS"],
+      ["RENATA", "ALVES"],
+      ["RENATA", "OLIVEIRA"],
+    ],
+    joke: "Assinatura de psicóloga irei salvar para meus conhecidos que precisam passar no psicotécnico, mas não conseguem.",
+  },
+
+  {
+    // ANA PAULA RIBEIRO KENES — may write "ANA PAULA RIBEIRO", "ANA PAULA KENES", etc.
+    keywords: [
+      ["ANA PAULA", "KENES"],
+      ["ANA PAULA", "RIBEIRO"],
+      ["ANA", "RIBEIRO"],
+      ["ANA", "KENES"],
+    ],
+    joke: "A assinatura de {nome} é valiosa. Muita gente pede ajuda para melhorar o XPS na 4DX. Com essa assinatura não precisa fazer nada.",
+  },
+
+  {
+    // MATHEUS AUGUSTO RICARDO PINHEIRO — may write "MATHEUS AUGUSTO", "MATHEUS PINHEIRO", etc.
+    keywords: [
+      ["MATHEUS AUGUSTO", "RICARDO"],
+      ["MATHEUS AUGUSTO", "PINHEIRO"],
+      ["MATHEUS", "RICARDO"],
+      ["MATHEUS", "PINHEIRO"],
+    ],
+    joke: "A assinatura de {nome} é valiosa. Muita gente pede ajuda para melhorar o XPS na 4DX. Com essa assinatura não precisa fazer nada.",
+  },
+
+
+
+
+];
+
+
+
+
 ];
 
 function getVIPJoke(name: string): string | null {
