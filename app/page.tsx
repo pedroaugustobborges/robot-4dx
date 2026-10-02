@@ -70,6 +70,18 @@ const VIP_JOKES: Array<{ keywords: string[][]; joke: string }> = [
   {
     // IONE RODRIGUES DE OLIVEIRA — may write "IONE RODRIGUES", "OLIVEIRA", etc.
     keywords: [
+      ["FLAVIA", "GODOY"],
+      ["FLÁVIA", "GODOY"],
+      ["FLÁVIA", "DE OLIVEIRA"],
+      ["FLÁVIA", "CASTELO"],
+      ["FLAVIA", "CASTELO"],
+    ],
+    joke: "Com a assinatura de {nome} poderei fazer receita de qualquer remédio de altíssimo custo.",
+  },
+
+  {
+    // IONE RODRIGUES DE OLIVEIRA — may write "IONE RODRIGUES", "OLIVEIRA", etc.
+    keywords: [
       ["IONE", "RODRIGUES"],
       ["IONE", "OLIVEIRA"],
       ["IONE", "DE OLIVEIRA"],
@@ -376,6 +388,14 @@ export default function RobotPage() {
                 processNextSignature();
               },
               12 * 60 * 1000,
+            );
+
+            setTimeout(
+              () => {
+                sigQueueRef.current.push(sig);
+                processNextSignature();
+              },
+              20 * 60 * 1000,
             );
           }
         },
