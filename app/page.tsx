@@ -136,7 +136,13 @@ const VIP_JOKES: Array<{ keywords: string[][]; joke: string }> = [
   },
 ];
 
-function getVIPJoke(name: string): string | null {
+function isVIPCargo(cargo?: string): boolean {
+  if (!cargo) return false;
+  return VIP_CARGOS.includes(cargo);
+}
+
+function getVIPJoke(name: string, cargo?: string): string | null {
+  if (!isVIPCargo(cargo)) return null;
   const upper = name.toUpperCase();
   for (const vip of VIP_JOKES) {
     for (const group of vip.keywords) {
@@ -152,7 +158,7 @@ function getVIPJoke(name: string): string | null {
 const FUNNY_PHRASES = [
   "{nome} acabou de assinar! Analisei com inteligência artificial e… ainda não entendi o que está escrito.",
   "Obrigada, {nome}! Sua assinatura é tão única que meu sistema de reconhecimento de padrões simplesmente desistiu.",
-  "{nome} tem um futuro brilhante na medicina! Essa letra é perfeita para receita: completamente ilegível!",
+  "{nome} tem um futuro brilhante na medicina! Essa letra é perfeita para receitas.",
   "Registrei a assinatura de {nome} no Louvre. Uma verdadeira obra expressionista que ninguém entende.",
   "{nome} acaba de criar uma obra de arte! Já estou enviando para o Museu de Arte Moderna. Parabéns!",
   "Atenção! A assinatura de {nome} tem noventa e quatro por cento de probabilidade de ser um mapa do tesouro. Alguém tem bússola?",
@@ -181,17 +187,25 @@ const FUNNY_PHRASES = [
   "Que lindo, {nome} assinou! Encaminhei para o cartório e eles ligaram de volta perguntando se era um exame de ultrassom.",
 ];
 
-function getFunnyPhrase(name: string): string {
-  const vipJoke = getVIPJoke(name);
+function getFunnyPhrase(name: string, cargo?: string): string {
+  const vipJoke = getVIPJoke(name, cargo);
   if (vipJoke) return vipJoke;
   const template =
     FUNNY_PHRASES[Math.floor(Math.random() * FUNNY_PHRASES.length)];
   return template.replace(/\{nome\}/g, name);
 }
 
+const VIP_CARGOS = [
+  "Superintendente",
+  "Diretor(a)",
+  "Chefe de núcleo",
+  "Assessor(a)",
+];
+
 interface PendingSignature {
   id: string;
   name: string;
+  cargo?: string;
   signature_data: string;
 }
 
@@ -327,7 +341,7 @@ export default function RobotPage() {
     setSigDisplay({ name: sig.name, data: sig.signature_data });
 
     // Speak the funny phrase (goes through the normal speak queue)
-    const phrase = getFunnyPhrase(sig.name);
+    const phrase = getFunnyPhrase(sig.name, sig.cargo);
     speak(phrase);
 
     // Mark as displayed in DB
@@ -374,7 +388,7 @@ export default function RobotPage() {
             processNextSignature();
           }, 60000);
           // VIPs get repeat jokes at 5min and 12min after signing
-          if (getVIPJoke(sig.name)) {
+          if (getVIPJoke(sig.name, sig.cargo)) {
             setTimeout(
               () => {
                 sigQueueRef.current.push(sig);

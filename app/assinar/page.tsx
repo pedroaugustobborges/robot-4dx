@@ -4,8 +4,24 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import RobotFace from "@/components/RobotFace";
 import { createClient } from "@/lib/supabase";
 
+const CARGOS = [
+  "Superintendente",
+  "Diretor(a)",
+  "Chefe de núcleo",
+  "Assessor(a)",
+  "Gerente",
+  "Coordenador(a)",
+  "Supervisor(a)",
+  "Encarregado(a)",
+  "Analista",
+  "Especialista",
+  "Assistente",
+  "Convidado(a)",
+];
+
 export default function AssinarPage() {
   const [name, setName] = useState("");
+  const [cargo, setCargo] = useState("");
   const [step, setStep] = useState<"form" | "submitting" | "success">("form");
   const [hasDrawn, setHasDrawn] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -99,7 +115,7 @@ export default function AssinarPage() {
 
   // ── Submit ───────────────────────────────────────────────────────────────────
   const handleSubmit = async () => {
-    if (!name.trim() || !hasDrawn) return;
+    if (!name.trim() || !cargo || !hasDrawn) return;
     setStep("submitting");
 
     const canvas = canvasRef.current;
@@ -111,6 +127,7 @@ export default function AssinarPage() {
     const supabase = createClient();
     const { error } = await supabase.from("signatures").insert({
       name: name.trim(),
+      cargo,
       signature_data: signatureData,
       displayed: false,
     });
@@ -127,6 +144,7 @@ export default function AssinarPage() {
   // ── Reset for next person ────────────────────────────────────────────────────
   const handleReset = () => {
     setName("");
+    setCargo("");
     setHasDrawn(false);
     setStep("form");
     // Re-init canvas after render
@@ -207,7 +225,8 @@ export default function AssinarPage() {
   // ════════════════════════════════════════════════════════════════════════════
   // FORM SCREEN
   // ════════════════════════════════════════════════════════════════════════════
-  const canSubmit = name.trim().length > 0 && hasDrawn && step === "form";
+  const canSubmit =
+    name.trim().length > 0 && cargo.length > 0 && hasDrawn && step === "form";
 
   return (
     <div
@@ -286,6 +305,60 @@ export default function AssinarPage() {
               (e.target.style.border = "1.5px solid rgba(0,212,255,0.25)")
             }
           />
+        </div>
+
+        {/* Cargo selector */}
+        <div>
+          <label
+            className="block text-cyan-300 text-sm font-semibold mb-3 tracking-wide"
+            style={{ fontFamily: "var(--font-space-grotesk)" }}
+          >
+            SEU CARGO ATUAL
+            {!cargo && (
+              <span className="ml-2 text-cyan-500/60 text-xs font-normal normal-case tracking-normal">
+                (obrigatório)
+              </span>
+            )}
+          </label>
+          <div className="flex flex-wrap gap-2">
+            {CARGOS.map((c) => {
+              const selected = cargo === c;
+              return (
+                <button
+                  key={c}
+                  type="button"
+                  onClick={() => setCargo(c)}
+                  className="relative px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 active:scale-95"
+                  style={{
+                    fontFamily: "var(--font-space-grotesk)",
+                    background: selected
+                      ? "linear-gradient(135deg, rgba(0,212,255,0.25), rgba(0,180,220,0.15))"
+                      : "rgba(255,255,255,0.04)",
+                    border: selected
+                      ? "1.5px solid rgba(0,212,255,0.7)"
+                      : "1.5px solid rgba(255,255,255,0.1)",
+                    color: selected ? "#00d4ff" : "rgba(255,255,255,0.5)",
+                    boxShadow: selected
+                      ? "0 0 14px rgba(0,212,255,0.2), inset 0 0 10px rgba(0,212,255,0.05)"
+                      : "none",
+                    cursor: "pointer",
+                    letterSpacing: "0.01em",
+                  }}
+                >
+                  {selected && (
+                    <span
+                      className="absolute inset-0 rounded-xl pointer-events-none"
+                      style={{
+                        background:
+                          "linear-gradient(135deg, rgba(0,212,255,0.07), transparent)",
+                      }}
+                    />
+                  )}
+                  {c}
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {/* Signature canvas */}
