@@ -68,7 +68,7 @@ const VIP_JOKES: Array<{ keywords: string[][]; joke: string }> = [
   },
 
   {
-    // IONE RODRIGUES DE OLIVEIRA — may write "IONE RODRIGUES", "OLIVEIRA", etc.
+    // FLÁVIA DE OLIVEIRA GODOY — may write "FLÁVIA GODOY", "FLÁVIA OLIVEIRA", etc.
     keywords: [
       ["FLAVIA", "GODOY"],
       ["FLÁVIA", "GODOY"],
