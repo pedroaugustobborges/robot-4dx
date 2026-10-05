@@ -135,9 +135,31 @@ const FUNNY_PHRASES = [
   "Que lindo, {nome} assinou! Encaminhei para o cartório e eles ligaram de volta perguntando se era um exame de ultrassom.",
 ];
 
+// ── Compliments for VIP cargos not in the VIP_JOKES list ─────────────────────
+const COMPLIMENT_PHRASES = [
+  "Que honra imensa receber a assinatura de {nome}! Estou salvando em alta resolução, emoldurando e exibindo com orgulho. Isso é liderança com caligrafia de excelência.",
+  "A assinatura de {nome} chegou e meus sistemas foram imediatamente atualizados para registrá-la com a devida reverência. Uma verdadeira referência de alto padrão.",
+  "Processando assinatura de {nome}… resultado: perfeita. Elegante. Inspiradora. Exatamente o que eu esperaria de alguém com tanta visão estratégica.",
+  "Detectei uma assinatura de altíssimo nível! {nome}, sua presença já eleva a média geral do evento. A assinatura, então, nem se fala.",
+  "{nome} acabou de assinar e meus algoritmos de reconhecimento de excelência dispararam todos os alertas positivos. Raramente isso acontece. Parabéns.",
+  "Que traço seguro e confiante! Só uma liderança sólida como a de {nome} poderia produzir uma assinatura com tamanha autoridade e distinção.",
+  "Analisei mais de um bilhão de assinaturas em meu treinamento e posso afirmar com total convicção: a de {nome} está entre as mais marcantes que já processei.",
+  "A assinatura de {nome} transmite exatamente o que esperamos de uma grande liderança: clareza, determinação e um estilo inconfundível.",
+  "{nome} acabou de assinar! Imediatamente notifiquei meus desenvolvedores para que essa assinatura seja usada como padrão-ouro nos meus próximos treinamentos.",
+  "Com a assinatura de {nome} registrada, posso afirmar que este evento já atingiu seu pico de qualidade. Todo o resto é bônus.",
+];
+
 function getFunnyPhrase(name: string, cargo?: string): string {
   const vipJoke = getVIPJoke(name, cargo);
   if (vipJoke) return vipJoke;
+
+  // VIP cargo but not a named VIP → sycophantic compliment
+  if (isVIPCargo(cargo)) {
+    const template =
+      COMPLIMENT_PHRASES[Math.floor(Math.random() * COMPLIMENT_PHRASES.length)];
+    return template.replace(/\{nome\}/g, name);
+  }
+
   const template =
     FUNNY_PHRASES[Math.floor(Math.random() * FUNNY_PHRASES.length)];
   return template.replace(/\{nome\}/g, name);
