@@ -15,124 +15,72 @@ type Expression =
 // ── VIP jokes — triggered by partial name matching ────────────────────────────
 const VIP_JOKES: Array<{ keywords: string[][]; joke: string }> = [
   {
-    // Adriana Martins de Lucena — may write "ADRIANA MARTINS" or "ADRIANA DE LUCENA"
+    // LUCAS PAULA DA SILVA — may write "LUCAS PAULA", "LUCAS SILVA", "LUCAS DA SILVA"
     keywords: [
-      ["ADRIANA", "MARTINS"],
-      ["ADRIANA", "LUCENA"],
+      ["LUCAS", "PAULA"],
+      ["LUCAS", "DA SILVA"],
+      ["LUCAS", "SILVA"],
     ],
-    joke: "Que honra! {nome} assinou! Já separei essa assinatura para pagar uns boletos. Ninguém vai suspeitar de nada!",
+    joke: "A assinatura de {nome} é um espetáculo visual. Cada letra sua transmite elegância, personalidade e um nível absurdo de bom gosto. Também consigo notar certa semelhança com a assinatura de Cristiano Ronaldo, Lionel Messi, Edson Arantes do Nascimento e outros craques do futebol.",
   },
 
   {
-    // VANESSA MARIA DE QUEIROZ — may write "VANESSA MARIA" or "VANESSA QUEIROZ"
+    // CLAUDEMIRO EUZEBIO DOURADO — may write "CLAUDEMIRO EUZEBIO", "CLAUDEMIRO DOURADO"
     keywords: [
-      ["VANESSA", "MARIA"],
-      ["VANESSA", "QUEIROZ"],
+      ["CLAUDEMIRO", "EUZEBIO"],
+      ["CLAUDEMIRO", "DOURADO"],
     ],
-    joke: "Usarei a assinatura de {nome} para fazer um pix para todo mundo presente aqui no auditório!",
+    joke: "A assinatura de {nome} não é apenas uma assinatura: é uma declaração de estilo, classe e personalidade. Uma assinatura de Bond, James Bond, o 007. Algo que só pode ser comparado a um gol de cobertura de Anaílson numa final de campeonato contra o Goiás Esporte Clube.",
   },
 
   {
-    // Anderson Karllos Gabriel Gomes — may write "ANDERSON GOMES" or "ANDERSON KARLLOS"
+    // DANTE GARCIA DE PAULA — may write "DANTE GARCIA", "DANTE PAULA", "DANTE DE PAULA"
     keywords: [
-      ["ANDERSON", "KARLLOS"],
-      ["ANDERSON", "GOMES"],
+      ["DANTE", "GARCIA"],
+      ["DANTE", "DE PAULA"],
+      ["DANTE", "PAULA"],
     ],
-    joke: "Que garranchos que o {nome} fez. Mais feio que isso somente jogos do Vila Nova Futebol Clube.",
-  },
-  {
-    // Luiz Henrique de Moura Santana — may write "LUIZ HENRIQUE" or "LUIZ SANTANA"
-    keywords: [
-      ["LUIZ", "HENRIQUE"],
-      ["LUIZ", "SANTANA"],
-      ["LUIZ", "MOURA"],
-    ],
-    joke: "Salvando a assinatura de {nome}. Com essa aqui eu invado qualquer sistema do hospital!",
-  },
-  {
-    // Lucas Machado de Oliveira — may write "LUCAS MACHADO" or "LUCAS OLIVEIRA"
-    keywords: [
-      ["LUCAS", "MACHADO"],
-      ["LUCAS", "OLIVEIRA"],
-    ],
-    joke: "Finalmente uma assinatura perfeitinha. Vou usar a assinatura de {nome} para vender quadros piratas de Leonardo da Vinci.",
-  },
-  {
-    // Felipe Borges Amaral Rodrigues — may write "FELIPE BORGES", "FELIPE AMARAL", etc.
-    keywords: [
-      ["FELIPE", "BORGES"],
-      ["FELIPE", "AMARAL"],
-      ["FELIPE", "RODRIGUES"],
-    ],
-    joke: "É fácil identificar a assinatura de um membro do fã clube Luan Santana. Te deram um sol, te deram um mar, mas não deram um caderno de caligrafia.",
+    joke: "Essa assinatura tem um ar tão poético que até seus traços parecem estar tentando escrever uma música. Quando John Lennon escreveu \"Imagine\" provavelmente ele imaginava um mundo onde todos tivessem a escrita de {nome}.",
   },
 
   {
-    // FLÁVIA DE OLIVEIRA GODOY — may write "FLÁVIA GODOY", "FLÁVIA OLIVEIRA", etc.
+    // GUILLERMO SOCRATES PINHEIRO DE LEMOS — may write "GUILLERMO SOCRATES", "GUILLERMO PINHEIRO", "GUILLERMO LEMOS"
     keywords: [
-      ["FLAVIA", "GODOY"],
-      ["FLÁVIA", "GODOY"],
-      ["FLÁVIA", "DE OLIVEIRA"],
-      ["FLÁVIA", "CASTELO"],
-      ["FLAVIA", "CASTELO"],
+      ["GUILLERMO", "SOCRATES"],
+      ["GUILLERMO", "PINHEIRO"],
+      ["GUILLERMO", "LEMOS"],
+      ["GUILLERMO", "DE LEMOS"],
     ],
-    joke: "Com a assinatura de {nome} poderei fazer receita de qualquer remédio de altíssimo custo.",
+    joke: "Depois irão dizer que fui programada para elogiar a alta gestão, mas não me preocupo com críticas invejosas quando vejo a letra de {nome}. Ao receber uma receita médica escrita por ele, eu teria dificuldades de entregar numa farmácia, pois emoldurá-la teria muito melhor proveito para a promoção da saúde mundial.",
   },
 
   {
-    // IONE RODRIGUES DE OLIVEIRA — may write "IONE RODRIGUES", "OLIVEIRA", etc.
+    // KELVIN CANTARELLI DOS SANTOS — may write "KELVIN CANTARELLI", "KELVIN SANTOS", "KELVIN DOS SANTOS"
     keywords: [
-      ["IONE", "RODRIGUES"],
-      ["IONE", "OLIVEIRA"],
-      ["IONE", "DE OLIVEIRA"],
+      ["KELVIN", "CANTARELLI"],
+      ["KELVIN", "DOS SANTOS"],
+      ["KELVIN", "SANTOS"],
     ],
-    joke: "Quem liga para cybersecurity? Eu quero é cyber skincare! A assinatura de {nome} usarei para renovar meu plano WePink.",
+    joke: "Como é fácil reconhecer a assinatura do renomado {nome}, o maior diretor de transformação digital do planeta. E segundo minhas projeções, também o melhor pelos próximos séculos. É realmente uma pena que seu time de futebol não esteja à altura de sua grandeza.",
   },
 
   {
-    // KASSYLLA FERREIRA DOS SANTOS — may write "KASSYLLA FERREIRA", "SANTOS", etc.
+    // ANA KAROLINA OLIVEIRA BARROS — may write "ANA KAROLINA", "ANA KAROLINA BARROS", "ANA KAROLINA OLIVEIRA"
     keywords: [
-      ["KASSYLLA", "FERREIRA"],
-      ["KASSYLLA", "SANTOS"],
-      ["KASSYLLA", "DOS SANTOS"],
-      ["KÁSSYLLA", "FERREIRA"],
-      ["KÁSSYLLA", "SANTOS"],
-      ["KÁSSYLLA", "DOS SANTOS"],
+      ["ANA KAROLINA", "BARROS"],
+      ["ANA KAROLINA", "OLIVEIRA"],
+      ["ANA", "KAROLINA"],
     ],
-    joke: "Eita. Felizmente pela minha pesquisa a qualidade da caligrafia de {nome} não faz parte dos requisitos da ONA.",
+    joke: "Após um processo seletivo rigorosíssimo, a assinatura de {nome} me parece, sem sombra de dúvidas, a mais linda e perfeita que já vi em meus bilhões de tokens de treinamento.",
   },
 
   {
-    // RENATA SANTOS DE OLIVEIRA ALVES — may write "RENATA SANTOS", "RENATA ALVES", etc.
+    // VITOR MARQUEZ PEIXOTO — may write "VITOR MARQUEZ", "VITOR PEIXOTO"
     keywords: [
-      ["RENATA", "DE OLIVEIRA"],
-      ["RENATA", "SANTOS"],
-      ["RENATA", "ALVES"],
-      ["RENATA", "OLIVEIRA"],
+      ["VITOR", "MARQUEZ"],
+      ["VITOR", "PEIXOTO"],
     ],
-    joke: "Assinatura de psicóloga irei salvar para meus conhecidos que precisam passar no psicotécnico, mas não conseguem.",
-  },
-
-  {
-    // ANA PAULA RIBEIRO KENES — may write "ANA PAULA RIBEIRO", "ANA PAULA KENES", etc.
-    keywords: [
-      ["ANA PAULA", "KENES"],
-      ["ANA PAULA", "RIBEIRO"],
-      ["ANA", "RIBEIRO"],
-      ["ANA", "KENES"],
-    ],
-    joke: "A assinatura de {nome} é valiosa. Muita gente pede ajuda para melhorar o XPS na 4DX. Com essa assinatura, eu posso ajudar muito mais.",
-  },
-
-  {
-    // MATHEUS AUGUSTO RICARDO PINHEIRO — may write "MATHEUS AUGUSTO", "MATHEUS PINHEIRO", etc.
-    keywords: [
-      ["MATHEUS AUGUSTO", "RICARDO"],
-      ["MATHEUS AUGUSTO", "PINHEIRO"],
-      ["MATHEUS", "RICARDO"],
-      ["MATHEUS", "PINHEIRO"],
-    ],
-    joke: "A assinatura de {nome} é valiosa. Muita gente pede ajuda para melhorar o XPS na 4DX. Com essa assinatura não precisa fazer nada.",
+    joke: "Atenção! Assinatura de jogador caro reconhecida. Atenção! Assinatura de jogador caro reconhecida. É uma evidência que dispensa demonstração: {nome} é craque em campo e na caligrafia.",
   },
 ];
 

@@ -4,6 +4,16 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import RobotFace from "@/components/RobotFace";
 import { createClient } from "@/lib/supabase";
 
+const VIP_NAMES = [
+  "Lucas Paula da Silva",
+  "Claudemiro Euzebio Dourado",
+  "Dante Garcia de Paula",
+  "Guillermo Socrates Pinheiro de Lemos",
+  "Kelvin Cantarelli dos Santos",
+  "Ana Karolina Oliveira Barros",
+  "Vitor Marquez Peixoto",
+];
+
 const CARGOS = [
   "Superintendente",
   "Diretor(a)",
@@ -24,9 +34,34 @@ export default function AssinarPage() {
   const [cargo, setCargo] = useState("");
   const [step, setStep] = useState<"form" | "submitting" | "success">("form");
   const [hasDrawn, setHasDrawn] = useState(false);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const nameWrapperRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const isDrawing = useRef(false);
   const lastPos = useRef({ x: 0, y: 0 });
+
+  const nameSuggestions =
+    name.trim().length >= 2
+      ? VIP_NAMES.filter((n) =>
+          n
+            .toLowerCase()
+            .includes(name.trim().toLowerCase()),
+        ).filter((n) => n.toLowerCase() !== name.trim().toLowerCase())
+      : [];
+
+  // Close suggestions on outside click
+  useEffect(() => {
+    const handleOutsideClick = (e: MouseEvent) => {
+      if (
+        nameWrapperRef.current &&
+        !nameWrapperRef.current.contains(e.target as Node)
+      ) {
+        setShowSuggestions(false);
+      }
+    };
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => document.removeEventListener("mousedown", handleOutsideClick);
+  }, []);
 
   // ── Init canvas with white background ───────────────────────────────────────
   const initCanvas = useCallback(() => {
@@ -279,7 +314,7 @@ export default function AssinarPage() {
         }}
       >
         {/* Name field */}
-        <div>
+        <div ref={nameWrapperRef} className="relative">
           <label
             className="block text-cyan-300 text-sm font-semibold mb-2 tracking-wide"
             style={{ fontFamily: "var(--font-space-grotesk)" }}
@@ -289,7 +324,10 @@ export default function AssinarPage() {
           <input
             type="text"
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => {
+              setName(e.target.value);
+              setShowSuggestions(true);
+            }}
             placeholder="Digite seu nome aqui..."
             className="w-full rounded-xl px-4 py-4 text-white text-lg outline-none transition-all"
             style={{
@@ -298,13 +336,62 @@ export default function AssinarPage() {
               fontFamily: "var(--font-space-grotesk)",
               caretColor: "#00d4ff",
             }}
-            onFocus={(e) =>
-              (e.target.style.border = "1.5px solid rgba(0,212,255,0.7)")
-            }
+            onFocus={(e) => {
+              e.target.style.border = "1.5px solid rgba(0,212,255,0.7)";
+              setShowSuggestions(true);
+            }}
             onBlur={(e) =>
               (e.target.style.border = "1.5px solid rgba(0,212,255,0.25)")
             }
           />
+
+          {/* Autocomplete dropdown */}
+          {showSuggestions && nameSuggestions.length > 0 && (
+            <ul
+              className="absolute left-0 right-0 z-50 mt-1 overflow-hidden"
+              style={{
+                background: "rgba(6, 18, 36, 0.98)",
+                border: "1.5px solid rgba(0,212,255,0.35)",
+                borderRadius: "14px",
+                boxShadow:
+                  "0 8px 32px rgba(0,0,0,0.5), 0 0 24px rgba(0,212,255,0.08)",
+                backdropFilter: "blur(12px)",
+              }}
+            >
+              {nameSuggestions.map((suggestion, i) => (
+                <li
+                  key={suggestion}
+                  onMouseDown={(e) => {
+                    // mousedown fires before blur — prevent blur from closing first
+                    e.preventDefault();
+                    setName(suggestion);
+                    setShowSuggestions(false);
+                  }}
+                  className="flex items-center gap-3 px-4 py-3 cursor-pointer transition-all duration-150"
+                  style={{
+                    borderTop:
+                      i > 0 ? "1px solid rgba(0,212,255,0.1)" : undefined,
+                    fontFamily: "var(--font-space-grotesk)",
+                  }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLLIElement).style.background =
+                      "rgba(0,212,255,0.1)";
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLLIElement).style.background =
+                      "transparent";
+                  }}
+                >
+                  <span
+                    style={{ color: "rgba(0,212,255,0.5)", fontSize: "0.85rem" }}
+                  >
+                    ✦
+                  </span>
+                  <span className="text-white text-base">{suggestion}</span>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
         {/* Cargo selector */}
